@@ -1,24 +1,21 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+CALENDAR TO-DO LIST:
 
-### What is this repository for? ###
+1. set up new database
+    * users table:
+        * username (unique), password hash
+    * events table:
+        * id, username (foriegn key), title, date, time, location, category
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+2. set up login / register page
+    * copy html and php from turnip login
 
-### How do I get set up? ###
+3. make empty calendar
+    * make it do dates until infinity
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+4. add events 
 
-### Contribution guidelines ###
+5. 
 
-* Writing tests
-* Code review
-* Other guidelines
+6. 
