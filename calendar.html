@@ -13,11 +13,15 @@
         <h3 id="month_label"></h3>
         <button id="prev_month_btn">prev month</button>
         <button id="next_month_btn">next month</button>
-        <table>
+        <table id="calendar">
             <tr>
                 <td>S</td><td>M</td><td>T</td><td>W</td><td>Th</td><td>F</td><td>S</td>
             </tr>
-            <tr id="week1"></tr>
+            <tr id="week1" class="week"></tr>
+            <tr id="week2" class="week"></tr>
+            <tr id="week3" class="week"></tr>
+            <tr id="week4" class="week"></tr>
+            <tr id="week5" class="week"></tr>
         </table>
     </body>
 </html>
@@ -25,6 +29,8 @@
 <script>
     var currentMonth = new Month(2018, 9); // October 2018
     document.getElementById("month_label").innerHTML = (currentMonth.month+1)+" "+currentMonth.year;
+    updateCalendar(); // show the calendar
+
     // Change the month when the "next" button is pressed
     document.getElementById("next_month_btn").addEventListener("click", function(){
         currentMonth = currentMonth.nextMonth();
