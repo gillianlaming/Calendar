@@ -15,7 +15,7 @@
         <button id="next_month_btn">next month</button>
         <table id="calendar">
             <tr>
-                <td>S</td><td>M</td><td>T</td><td>W</td><td>Th</td><td>F</td><td>S</td>
+                <td>Sunday</td><td>Monday</td><td>Tuesday</td><td>Wednesday</td><td>Thursday</td><td>Friday</td><td>Saturday</td>
             </tr>
             <tr id="week1" class="week"></tr>
             <tr id="week2" class="week"></tr>
@@ -28,20 +28,20 @@
 
 <script>
     var currentMonth = new Month(2018, 9); // October 2018
-    document.getElementById("month_label").innerHTML = (currentMonth.month+1)+" "+currentMonth.year;
+    document.getElementById("month_label").innerHTML = getMonthName()+" "+currentMonth.year;
     updateCalendar(); // show the calendar
 
     // Change the month when the "next" button is pressed
     document.getElementById("next_month_btn").addEventListener("click", function(){
         currentMonth = currentMonth.nextMonth();
         updateCalendar(); 
-        document.getElementById("month_label").innerHTML = (currentMonth.month+1) +" "+currentMonth.year;
+        document.getElementById("month_label").innerHTML = getMonthName() +" "+currentMonth.year;
     }, false);
 
     document.getElementById("prev_month_btn").addEventListener("click", function(){
         currentMonth = currentMonth.prevMonth();
         updateCalendar(); 
-        document.getElementById("month_label").innerHTML = (currentMonth.month+1) +" "+currentMonth.year;
+        document.getElementById("month_label").innerHTML = getMonthName() +" "+currentMonth.year;
     }, false);
 
 </script>

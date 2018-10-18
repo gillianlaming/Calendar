@@ -181,3 +181,13 @@ input:hover{
     background-color: #ddd;
     text-align: left;
 }
+
+#calendar td{
+    width: 150px;
+}
+
+#calendar .date{
+    position: relative;
+    top: -30px;
+    left: 140px;
+}
