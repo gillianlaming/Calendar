@@ -1,7 +1,41 @@
 <!DOCTYPE HTML>
 <html>
-<title> hey leel</title>
-<body>
-    heyyy
-</body>
+    <head>
+        <meta charset="utf-8"/>
+        <title>calendar</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="calendar.css">
+        <script type="text/javascript" src="calscript.js"></script>
+        <script type="text/javascript" src="calendar.min.js"></script>
+    </head>
+    <body>
+        <h1>Your Calendar</h1>
+        <h3 id="month_label"></h3>
+        <button id="prev_month_btn">prev month</button>
+        <button id="next_month_btn">next month</button>
+        <table>
+            <tr>
+                <td>S</td><td>M</td><td>T</td><td>W</td><td>Th</td><td>F</td><td>S</td>
+            </tr>
+            <tr id="week1"></tr>
+        </table>
+    </body>
 </html>
+
+<script>
+    var currentMonth = new Month(2018, 9); // October 2018
+    document.getElementById("month_label").innerHTML = (currentMonth.month+1)+" "+currentMonth.year;
+    // Change the month when the "next" button is pressed
+    document.getElementById("next_month_btn").addEventListener("click", function(){
+        currentMonth = currentMonth.nextMonth();
+        updateCalendar(); 
+        document.getElementById("month_label").innerHTML = (currentMonth.month+1) +" "+currentMonth.year;
+    }, false);
+
+    document.getElementById("prev_month_btn").addEventListener("click", function(){
+        currentMonth = currentMonth.prevMonth();
+        updateCalendar(); 
+        document.getElementById("month_label").innerHTML = (currentMonth.month+1) +" "+currentMonth.year;
+    }, false);
+
+</script>
