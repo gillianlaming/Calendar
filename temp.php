@@ -1,5 +1,5 @@
 <?php
-    require 'database.php';
+    require 'calendar_database.php';
     
     // register box:
     // if username does not correspond to any username in users table
@@ -34,9 +34,13 @@
        $current_users->close();
        
         if ($user_exists){
-            echo "user ".$name." already exists.";
-            echo "<a href=../newslogin.html>Home</a>";
-            exit;
+            ?>
+            <script>
+                alert("this username already exists")
+                window.location.href = "login.html";
+            </script>
+            <?php
+            
         }
         else{ // register new user
              $create_user = $mysqli->prepare("insert into users (username, password_hash) values (?, ?)");
@@ -52,11 +56,11 @@
             <script>
 
             alert("your account has been created")
+            window.location.href = "login.html";
             
             </script>
             <?php
 
-            // <!-- echo "hi " . $name . ", your account has been created!<br>"; -->
             
         }
     }
@@ -109,15 +113,23 @@
                 // successful login
                 session_start();
                 $_SESSION['name'] = $name;
-                header("Location: ../theturnip.php");
+                // header("Location: ../theturnip.php");
             } else { // if password wrong
-                echo "<br>incorrect password.<br>";
-                echo "<a href=../newslogin.html>Try Again or Register for an Account</a>";
+                ?>
+                <script>
+                alert("incorrect password")
+                window.location.href = "login.html";
+                </script>
+                <?php
             }
         } else { // if username wrong
-            echo "user ".$name." does not have an account.";
-            echo "<a href=../newslogin.html>Try Again or Register for an Account</a>";
-            exit;
+            ?>
+            <script>
+            alert("this user does not have account")
+            window.location.href = "login.html";
+            </script>
+            <?php
+            
         }
     }
     $mysqli->close();
