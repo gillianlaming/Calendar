@@ -113,7 +113,7 @@
                 // successful login
                 session_start();
                 $_SESSION['name'] = $name;
-                // header("Location: ../theturnip.php");
+                header("Location: ../calendar.html");
             } else { // if password wrong
                 ?>
                 <script>
