@@ -3,27 +3,33 @@
 	<head>
 		<meta charset="utf-8"/>
 		<title>Login</title>
-		<script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<link rel="stylesheet" href="calendar.css">
 	</head>
-	<body>
-        <div id="box">
-			<h1>Login</h1>
-    
-            <form action="login.php" method="post">
-                Username: <input type="text" name="name" >
-                <br>
-				Password: <input type="password" name="pass" >
-				<br><br>
-               <input type="submit" name="submit_login" value="Login">
-			   <br><br>
-            </form>
-		</div>
+	<body> Login
+            <input type="text" id="username" placeholder="Username" />
+            <input type="password" id="password" placeholder="Password" />
+            <button id="login_btn">Log In</button>
+            
+            <script type="text/javascript" src="ajax.js"></script> <!-- load the JavaScript file -->
+		
+			<div id="box">
+				<h1>Login</h1>
+		
+				<form action="temp.php" method="post">
+					Username: <input type="text" name="name" >
+					<br>
+					Password: <input type="password" name="pass" >
+					<br><br>
+				   <input type="submit" name="submit_login" value="Login">
+				   <br><br>
+				</form>
+			</div>
+	
 
 		<div id="box2">
 			<h1>Register</h1>
     
-            <form action="login.php" method="post">
+            <form action="temp.php" method="post">
                 Username: <input type="text" name="new_name" >
                 <br>
 				Password: <input type="password" name="new_pass" >
