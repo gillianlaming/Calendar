@@ -9,12 +9,12 @@ $json_obj = json_decode($json_str, true);
 //Variables can be accessed as such:
 $username = $json_obj['username'];
 $password = $json_obj['password'];
-$hash = password_hash($pass, PASSWORD_BCRYPT);
+$hash = password_hash($password, PASSWORD_BCRYPT);
 //This is equivalent to what you previously did with $_POST['username'] and $_POST['password']
 
 // Check to see if the username and password are valid.  (You learned how to do this in Module 3.)
 
-if(password_verify($pass, $hash)){
+if(password_verify($password, $hash)){
 	session_start();
 	$_SESSION['username'] = $username;
 	$_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(32)); 
