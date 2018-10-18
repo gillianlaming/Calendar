@@ -34,3 +34,4 @@ Notes from tutor:
 * upload everything to ec2
 *CSRF code in web application and security under solutions: examples 1 and 2
 * email tutor "show create table" for all of the table creations
+*creative portion: ajax request to google maps to look for their location
