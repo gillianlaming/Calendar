@@ -9,8 +9,12 @@ function updateCalendar(){
 		let this_week = "week" + i;
 		for(var d in days){
             let this_date = days[d].getDate();
+            if (days[d].getMonth() == currentMonth.month){
+                  $('#'+this_week).append("<td class='day_this_month'><h6 class='date'>"+this_date+"</h6></td>");
+            } else{
+                $('#'+this_week).append("<td class='day_wrong_month'><h6 class='date'>"+this_date+"</h6></td>");
+            } 
             // show dates in columns
-            $('#'+this_week).append("<td><h6 class='date'>"+this_date+"</h6></td>");
         }
         i++;
 	}

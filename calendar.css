@@ -178,12 +178,19 @@ input:hover{
 
 #calendar .week{
     height: 100px;
-    background-color: #ddd;
     text-align: left;
 }
 
 #calendar td{
     width: 150px;
+}
+
+.day_this_month{
+    background-color: #8BD6FD;
+}
+
+.day_wrong_month{
+    background-color: #eee;
 }
 
 #calendar .date{
