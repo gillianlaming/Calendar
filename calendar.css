@@ -170,3 +170,14 @@ input:hover{
 #comment{
     width: 25%;
 }
+
+#calendar{
+    width: 80%;
+    margin-left: 10%;
+}
+
+#calendar .week{
+    height: 100px;
+    background-color: #ddd;
+    text-align: left;
+}
