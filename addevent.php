@@ -16,15 +16,10 @@
         ?>
 
     <script>
-        // this part goes in leelas part
-        let event_name = get the event
-        let start_date = start date
-        let end_date = end date
-        let location = location 
 
         let url = 'addevent.php';
         let formData = new FormData();
-        formData.append("event_name", name, "start_date", date, "end_date", date, "location", location);
+        formData.append("event_name", event_name, "start_date", start_date, "end_date", end_date, "location", location);
 
             fetch('addevent.php', {
             method: "POST",
@@ -40,6 +35,16 @@
         .then(response => console.log('Success:', JSON.stringify(response)))
         .catch(error => console.error('Error:',error))
 
+
+        var formData = new FormData(someFormElement);
+        var formElement = document.querySelector("form");
+        var request = new XMLHttpRequest();
+        request.open("POST", "addevent.php");
+        request.send(new FormData(formElement));
+
+        <form>
+         <input type="button" value="Click Me" onclick="calendar.php" />
+      </form>
         
     </script>
 </html>
