@@ -189,6 +189,11 @@ input:hover{
     background-color: #8BD6FD;
 }
 
+.day_this_month:hover{
+    cursor: pointer;
+    opacity: .8;
+}
+
 .day_wrong_month{
     background-color: #eee;
 }
@@ -201,4 +206,7 @@ input:hover{
 
 #popUp{
     display: none;
+    width: 100%;
+    background-color: #333;
+    color: #fff;
 }

@@ -36,6 +36,6 @@ function addListeners(days){
 
 
 function clickDay() { 
-    alert("hi");
-    // $('#popUp').css('style', 'block');
+    $('#popUp').dialog();
+    //$('#calendar').css('opacity', '.5');
 }
