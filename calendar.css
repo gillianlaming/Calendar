@@ -177,7 +177,7 @@ input:hover{
 }
 
 #calendar .week{
-    height: 100px;
+    height: 90px;
     text-align: left;
 }
 
@@ -196,5 +196,5 @@ input:hover{
 #calendar .date{
     position: relative;
     top: -30px;
-    left: 140px;
+    left: 120px;
 }
