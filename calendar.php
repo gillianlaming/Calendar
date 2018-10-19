@@ -2,7 +2,7 @@
 <html>
     <head>
         <?php
-
+        session_start();
         ?>
         <meta charset="utf-8"/>
         <title>calendar</title>

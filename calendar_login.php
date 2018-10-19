@@ -4,7 +4,6 @@
     // register box:
     // if username does not correspond to any username in users table
     // add username and hashed password to users table
-    // then redirect to newslogin.html
     
     if (isset($_POST['submit_register'])) {      
         $name = $_POST["new_name"];
@@ -91,7 +90,7 @@
             if ($name === $username){ // check for username
                 $user_exists = true;
                 break;
-            }
+            }we 
         }
         $current_users->close();
         
