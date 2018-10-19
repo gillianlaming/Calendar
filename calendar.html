@@ -1,9 +1,6 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-        <?php
-
-        ?>
         <meta charset="utf-8"/>
         <title>calendar</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
@@ -45,10 +42,6 @@
         currentMonth = currentMonth.prevMonth();
         updateCalendar(); 
         document.getElementById("month_label").innerHTML = getMonthName() +" "+currentMonth.year;
-    }, false);
-
-    document.getElementsByClassName('day_this_month').addEventListener('click', function(){
-        alert("hi");
     }, false);
 
 </script>
