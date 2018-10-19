@@ -2,12 +2,12 @@
 <html>
 <?php
 		require 'calendar_database.php';
-        session_start();
+        // session_start();
         
-        if(isset($_SESSION['name'])){ // if logged in
-            $name = $_SESSION['name'];
+        // if(isset($_SESSION['name'])){ // if logged in
+        //     $name = $_SESSION['name'];
             
-        }
+        // }
         if(isset($_POST['x'])){
             $form_data = $_POST['x'];
             echo $form_data;
@@ -42,9 +42,6 @@
         request.open("POST", "addevent.php");
         request.send(new FormData(formElement));
 
-        <form>
-         <input type="button" value="Click Me" onclick="calendar.php" />
-      </form>
         
     </script>
 </html>
