@@ -17,7 +17,7 @@
 
         <div id="popUp">
             <h1>new event</h1>
-            <form name="form" action="" method="post" enctype="multipart/form-data">
+            <form name="form" id = "myForm" action="" method="post" enctype="multipart/form-data">
                     <input type="text" name="event_name" id="event_name" placeholder="event name" required><br> 
                     <input type="text" name="start_date" id="start_date" placeholder="start date and time" required><br> 
                     <input type="text" name="end_date" id="end_date"placeholder="end date and time" required><br> 
@@ -61,7 +61,7 @@
     addListeners(document.getElementsByClassName("day_this_month"));
 </script>
 <script>
-    //needs to be on click
+    //use this website https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Sending_forms_through_JavaScript
     function addevent(){
         //let form = document.getElementsByName("event_name")[0];
         let form = document.getElementById("popUp");
@@ -94,6 +94,8 @@
         ev.preventDefault();
         }, false);
     }
+        let form = document.getElementById("myForm");
+        console.log(form);
         document.getElementById("submit").addEventListener("click", addevent(), false)
                 
     </script>
