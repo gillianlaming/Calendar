@@ -112,7 +112,7 @@
                 // successful login
                 session_start();
                 $_SESSION['name'] = $name;
-                header("Location: ../calendar.php"); //this is where we need to change
+                header("Location: ./calendar.php"); //this is where we need to change
             } else { // if password wrong
                 ?>
                 <script>
