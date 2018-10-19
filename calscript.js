@@ -26,3 +26,16 @@ function getMonthName(){
     if (monthNum == 4){ return 'May';}if (monthNum == 5){ return 'June';}if (monthNum == 6){ return 'July';}if (monthNum == 7){ return 'August';}
     if (monthNum == 8){ return 'September';}if (monthNum == 9){ return 'October';}if (monthNum == 10){ return 'November';}if (monthNum == 11){ return 'December';}
 }
+
+
+function addListeners(days){
+    for (var i=0; i<days.length; i++){
+        days[i].addEventListener('click', clickDay, false);
+    }
+}
+
+
+function clickDay() { 
+    alert("hi");
+    // $('#popUp').css('style', 'block');
+}

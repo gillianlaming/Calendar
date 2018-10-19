@@ -198,3 +198,7 @@ input:hover{
     top: -30px;
     left: 85%;
 }
+
+#popUp{
+    display: none;
+}

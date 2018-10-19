@@ -49,8 +49,5 @@
         updateCalendar(); 
         document.getElementById("month_label").innerHTML = getMonthName() +" "+currentMonth.year;
     }, false);
-
-    document.getElementsByClassName('day_this_month').addEventListener('click', function(){
-        alert("hi");
-    }, false);
+    
 </script>
