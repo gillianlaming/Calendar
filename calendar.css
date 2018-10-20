@@ -203,8 +203,9 @@ input:hover{
 #popUp{
     display: none;
     width: 100%;
-    background-color: #333;
+    background-color: #555;
     color: #fff;
+    border-radius: 15px;
 }
 
 #popUp h3{
@@ -235,4 +236,9 @@ input:hover{
 .day_this_month:hover #plus{
     cursor: pointer;
     display: block;
+}
+
+.event_name:hover{
+    cursor: pointer;
+    color: #ae184f;
 }
