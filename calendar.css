@@ -213,15 +213,16 @@ input:hover{
 }
 
 .time{
-    margin: 5px 0 -5px 10px;
+    margin: 5px 0 0 10px;
     font-size: 10px;
 }
 
-.event_name{
+.loc, .event_name{
     color: #333;
-    margin: -5px 0 5px 10px;
+    margin: 0 0 0 10px;
     font-size: 10px;
 }
+
 
 #plus{
     display: none;

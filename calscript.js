@@ -40,15 +40,17 @@ function getMonthName(){
 
 
 function addEvent(day) { 
-    $('#popUpHeader').html('<br><h3>add an event on '+day.parentNode.id+'</h3>');
-    $('#start_date').val(day.parentNode.id +" 0:00:00");
-    $('#end_date').val(day.parentNode.id +" 0:00:00");
+    let this_date = day.parentNode.id;
+    $('#popUpHeader').html('<br><h3>add an event on '+this_date+'</h3>');
+    $('#start_date').val(this_date+" 0:00:00");
+    $('#end_date').val(this_date +" 0:00:00");
     $('#popUp').dialog();
     $('#calendar').css('opacity', '.75');
     $('#popUp').on('dialogclose', function(event) {
         $('#calendar').css('opacity', '1');
     });
 }
+
 
 function displayEvents(){
     var xmlHttp = new XMLHttpRequest();
@@ -63,7 +65,7 @@ function displayEvents(){
             for (var i =0; i<parsed.length; i++){
                 let date = parsed[i].start_date.split(" ")[0];
                 let time = parsed[i].start_date.split(" ")[1];
-
+                let loc = parsed[i].location;
                 let day = date.substring(8);
                 
                 if (day[0] == 0){
@@ -74,7 +76,7 @@ function displayEvents(){
                 if (time[0] == 0)
                     time = time.substring(1);
                 
-                $('#'+date).append("<h6 class='time'>"+time+"</h6><i class='event_name'>"+parsed[i].event_name+"</i>");
+                $('#'+date).append("<h6 class='time' id='"+time+"'>"+time+"</h6><p class='event_name' id='"+parsed[i].event_name+"' onclick='editEvent(this)'>"+parsed[i].event_name+"<i id='"+loc+"'> at "+loc+"</i></p>");
                 $('#'+date+" h6").first().css({"margin-bottom": "-40px"});
                 $('#'+date+" img").first().css({"margin-bottom": "-20px","top": "0px"});
             }
@@ -85,4 +87,23 @@ function displayEvents(){
     }, false);
 
     xmlHttp.send(null);
+}
+
+
+function editEvent(event){
+    this_date = event.parentNode.id;
+    this_name = event.id;
+    this_time = event.parentNode.childNodes[2].id;
+    this_loc = event.parentNode.childNodes[3].childNodes[1].id;
+    $('#popUpHeader').html('<br><h3>edit event on '+this_date+'</h3>');
+    $('#event_name').val(this_name);
+    $('#start_date').val(this_date+" "+this_time);
+    $('#end_date').val(this_date +" 23:00:00");
+    $('#location').val(this_loc);
+    $('#submit').val('Save Event');
+    $('#popUp').dialog();
+    $('#calendar').css('opacity', '.75');
+    $('#popUp').on('dialogclose', function(event) {
+        $('#calendar').css('opacity', '1');
+    });
 }
