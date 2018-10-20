@@ -16,7 +16,7 @@
         <button id="next_month_btn">next month</button>
 
         <div id="popUp">
-            <h1>new event</h1>
+            <div id="popUpHeader"></div>
             <form name="form" id = "myForm" action="" method="post" enctype="multipart/form-data">
                     <input type="text" name="event_name" id="event_name" placeholder="event name" required><br> 
                     <input type="text" name="start_date" id="start_date" placeholder="start date and time" required><br> 
@@ -44,7 +44,6 @@
     var currentMonth = new Month(2018, 9); // current month is October 2018
     document.getElementById("month_label").innerHTML = getMonthName()+" "+currentMonth.year;
     updateCalendar(); // show the calendar
-
     // Change the month when the "next" button is pressed
     document.getElementById("next_month_btn").addEventListener("click", function(){
         currentMonth = currentMonth.nextMonth();
@@ -58,44 +57,4 @@
         document.getElementById("month_label").innerHTML = getMonthName() +" "+currentMonth.year;
     }, false);
 
-    addListeners(document.getElementsByClassName("day_this_month"));
 </script>
-<script>
-    //use this website https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Sending_forms_through_JavaScript
-    function addevent(){
-        //let form = document.getElementsByName("event_name")[0];
-        let form = document.getElementById("popUp");
-        console.log(form)
-        console.log("hello")
-        form.addEventListener('submit', function(ev) {
-        console.log("hey")
-        var oOutput = document.querySelector("div"),
-            oData = new FormData(form);
-            oData.append("event", document.getElementsByName("event_name"))
-            console.log(oData)
-        //oData.append("CustomField", "This is some extra data"); LETS USE THIS TO PASS USERNAME
-
-        var oReq = new XMLHttpRequest();
-        oReq.open("POST", "addevent.php", true);
-        oReq.onload = function(oEvent) {
-
-            console.log("fuck yea")
-
-            if (oReq.status == 200) {
-            oOutput.innerHTML = "Uploaded!";
-            } else {
-            oOutput.innerHTML = "Error " + oReq.status + " occurred when trying to upload your event.<br \/>";
-            }
-        };
-
-        console.log("hey")
-
-        oReq.send(oData);
-        ev.preventDefault();
-        }, false);
-    }
-        let form = document.getElementById("myForm");
-        console.log(form);
-        document.getElementById("submit").addEventListener("click", addevent(), false)
-                
-    </script>

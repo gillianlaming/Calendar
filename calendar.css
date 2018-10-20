@@ -189,19 +189,15 @@ input:hover{
     background-color: #8BD6FD;
 }
 
-.day_this_month:hover{
-    cursor: pointer;
-    opacity: .8;
-}
-
 .day_wrong_month{
     background-color: #eee;
 }
 
 #calendar .date{
     position: relative;
-    top: -30px;
+    top: -40px;
     left: 85%;
+    margin-bottom: -10px;
 }
 
 #popUp{
@@ -209,4 +205,33 @@ input:hover{
     width: 100%;
     background-color: #333;
     color: #fff;
+}
+
+#popUp h3{
+    font-size: 16px;
+    margin-top: 0;
+}
+
+.time{
+    margin: 5px 0 -5px 10px;
+    font-size: 10px;
+}
+
+.event_name{
+    color: #333;
+    margin: -5px 0 5px 10px;
+    font-size: 10px;
+}
+
+#plus{
+    display: none;
+    height: 20px;
+    position: relative;
+    left: calc(90% - 10px);
+    top: -30px;
+}
+
+.day_this_month:hover #plus{
+    cursor: pointer;
+    display: block;
 }
