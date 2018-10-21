@@ -5,6 +5,7 @@
     $end_date = $_POST['end_date'];
     $loc = $_POST['location'];
     $username = 'gillian'; // CHANGE THIS
+    $_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(32));
 
     $add_event = $mysqli->prepare("insert into events (username, event_name, start_date, end_date, location) values (?, ?, ?, ?, ?)");
     if(!$add_event){
