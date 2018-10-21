@@ -5,6 +5,8 @@
     }
     if(isset($_POST['username'])){
         $password = $_POST['password']; //must encrypt the password
+        $hashed = password_hash($password, PASSWORD_BCRYPT); //must encrypt the password
+
     }
 
     $current_users = $mysqli->prepare("select username from users order by username"); // get current users
@@ -24,14 +26,22 @@
         }
         if ($user_exists == true){
            //check password
-           echo ("true");
-           $myArray = array();
-            if ($result = $mysqli->query("select username, password_hash, from users order by username")) {
-        
-                while($row = $result->fetch_array(MYSQL_ASSOC)) {
-                    $myArray[] = $row;
-                }
-                echo json_encode($myArray);
+          
+            $get_hash = $mysqli->prepare("select password_hash from users where username=?");
+            // get the password_hash from the table
+            if(!$get_hash){
+                printf("Query Prep Failed: %s\n", $mysqli->error);
+                exit;
+            }
+            
+            $get_hash->bind_param('s', $username);
+            $get_hash->execute();
+            $get_hash->bind_result($hash); // store in variable
+            $get_hash->fetch();
+            $get_hash->close();
+            
+            if (password_verify($hashed, $hash)){
+                echo ("true");
             }
         
     
