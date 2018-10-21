@@ -44,13 +44,13 @@
                 echo ("true");
             }
             else{
-                echo ("false1");
+                echo ("false");
             }
         
     
         }
         else{
-            echo "false2";
+            echo ("false");
         }
         
         

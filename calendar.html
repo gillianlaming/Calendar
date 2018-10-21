@@ -108,7 +108,8 @@
             url: 'checkUser.php', 
             data: { username: loginInfo[0], password: loginInfo[1] },
             success: function(response) {
-                if (response === true){
+                console.log(response)
+                if (response === "true"){
                     const logged_in_user = loginInfo[0];
                     loggedIn(logged_in_user);
                 } else{
