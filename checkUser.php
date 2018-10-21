@@ -1,7 +1,11 @@
 <?php
     require 'calendar_database.php';
-    $username = $_POST['username'];
-    $password = $_POST['password']; //must encrypt the password
+    if(isset($_POST['username'])){
+        $username = $_POST['username'];
+    }
+    if(isset($_POST['username'])){
+        $password = $_POST['password']; //must encrypt the password
+    }
 
     $current_users = $mysqli->prepare("select username from users order by username"); // get current users
         if(!$current_users){
@@ -20,6 +24,7 @@
         }
         if ($user_exists == true){
            //check password
+           echo ("true");
            $myArray = array();
             if ($result = $mysqli->query("select username, password_hash, from users order by username")) {
         

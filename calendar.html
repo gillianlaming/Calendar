@@ -44,6 +44,7 @@
                 <div id="existing_user">
                     <input type="text" name="username1" id="username1" placeholder="username" required><br> 
                     <input type="password" name="password1" id="password1" placeholder="password" required><br> 
+                    <input type="hidden" name="token" value="<?php echo $_SESSION['token'];?>" />
                     <input type="submit" name="logmein" id = "logmein" value="login"><br><br>
                 </div>
             </div>
@@ -105,7 +106,7 @@
         $('#popUpLogin').closest('.ui-dialog-content').dialog('close');
         $.ajax({
             type: 'POST',
-            url: 'checkUser.php', //gotta make this page
+            url: 'checkUser.php', 
             data: { username: loginInfo[0], password: loginInfo[1] },
             success: function(response) {
                 console.log(response);

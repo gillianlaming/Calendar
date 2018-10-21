@@ -1,8 +1,12 @@
 <?php
     require 'calendar_database.php';
-    $username = $_POST['username'];
-    $password = $_POST['password']; //must encrypt the password
-
+    if(isset($_POST['username'])){
+        $username = $_POST['username'];
+    }
+    if(isset($_POST['username'])){
+        $password = $_POST['password']; //must encrypt the password
+    }
+   
     $add_user = $mysqli->prepare("insert into users (username, password_hash) values (?, ?)");
     if(!$add_user){
         printf("Query Prep Failed: %s\n", $mysqli->error);
