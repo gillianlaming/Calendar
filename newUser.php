@@ -5,7 +5,7 @@
     }
     if(isset($_POST['username'])){
         $password = $_POST['password'];
-        $hash = password_hash($pass, PASSWORD_BCRYPT); //must encrypt the password
+        $hash = password_hash($password, PASSWORD_BCRYPT); //must encrypt the password
     }
    
     $add_user = $mysqli->prepare("insert into users (username, password_hash) values (?, ?)");

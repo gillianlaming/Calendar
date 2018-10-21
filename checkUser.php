@@ -5,8 +5,7 @@
     }
     if(isset($_POST['username'])){
         $password = $_POST['password']; //must encrypt the password
-        $hashed = password_hash($password, PASSWORD_BCRYPT); //must encrypt the password
-
+        
     }
 
     $current_users = $mysqli->prepare("select username from users order by username"); // get current users
@@ -24,9 +23,9 @@
                 break;
             }
         }
+        $current_users->close();
         if ($user_exists == true){
            //check password
-          
             $get_hash = $mysqli->prepare("select password_hash from users where username=?");
             // get the password_hash from the table
             if(!$get_hash){
@@ -40,17 +39,21 @@
             $get_hash->fetch();
             $get_hash->close();
             
-            if (password_verify($hashed, $hash)){
+            
+            if (password_verify($password, $hash)){
                 echo ("true");
+            }
+            else{
+                echo ("false1");
             }
         
     
         }
         else{
-            echo "false";
+            echo "false2";
         }
         
-        $current_users->close();
+        
         $mysqli->close();
    
 ?>
