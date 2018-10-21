@@ -69,10 +69,9 @@ function sendNewEvent(form_contents){ // this sends the form contents to php whi
         url: 'newEvent.php',
         data: { event_name: form_contents[0], start_date: form_contents[1], end_date: form_contents[2], location: form_contents[3] },
         success: function(response) {
-            console.log(response);
+            console.log("new event added");
         }
     });
-
     updateCalendar();
 }
 
@@ -124,7 +123,7 @@ function editEvent(event){ // pulls up dialog box for editing event
     let this_time = event.parentNode.childNodes[2].id;
     let this_loc = event.parentNode.childNodes[3].childNodes[1].id;
     let this_event_id = event.parentNode.childNodes[3].childNodes[2].id; // not working
-    console.log(this_event_id);
+
     $('#popUpHeader').html('<br><h3>edit event on '+this_date+'</h3><button id="delete_event" value="'+this_name+'">Delete Event</button>');
     $('#new_event').attr('id', 'edit_event');
     $('#event_name').val(this_name);
@@ -146,14 +145,12 @@ function editEvent(event){ // pulls up dialog box for editing event
 function editThisEvent(form_contents) {
     $('#popUp').dialog('close');
 
-    console.log("event_id is: "+form_contents[4]);
-
     $.ajax({
         type: 'POST',
         url: 'editEvent.php',
         data: { event_name: form_contents[0], start_date: form_contents[1], end_date: form_contents[2], location: form_contents[3], event_id: form_contents[4] },
         success: function(response) {
-            console.log(response);
+            console.log("event edited");
         }
     });
 
