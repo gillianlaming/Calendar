@@ -78,7 +78,8 @@ function sendNewEvent(form_contents){ // this sends the form contents to php whi
 
 function displayEvents(){ // display events from SQL
     var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open("GET", "http://ec2-18-223-135-67.us-east-2.compute.amazonaws.com/getEvents.php", true);
+    // xmlHttp.open("GET", "http://ec2-18-223-135-67.us-east-2.compute.amazonaws.com/getEvents.php", true); //leela's
+    xmlHttp.open("GET", "http://ec2-18-207-202-216.compute-1.amazonaws.com/~gdlaming/getEvents.php", true); //gillians
     
     // on load
     xmlHttp.addEventListener('load', function(e){
@@ -156,3 +157,4 @@ function editThisEvent(form_contents) {
 
     updateCalendar();
 }
+

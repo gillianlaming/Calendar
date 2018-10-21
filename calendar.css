@@ -208,6 +208,14 @@ input:hover{
     border-radius: 15px;
 }
 
+#registering{
+    display: none;
+    width: 100%;
+    background-color: #555;
+    color: #fff;
+    border-radius: 15px;
+}
+
 #popUp h3{
     font-size: 16px;
     margin-top: 0;
@@ -242,3 +250,17 @@ input:hover{
     cursor: pointer;
     color: #ae184f;
 }
+
+.login{ 
+    position:absolute;
+    top:10px;
+    right: 10px;
+ }
+
+ .register{
+     position: absolute;
+     top:10px;
+     margin-top: 25px;
+     right: 10px;
+ }
+

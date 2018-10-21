@@ -10,6 +10,10 @@
         <script type="text/javascript" src="calendar.min.js"></script>
     </head>
     <body>
+        
+        <button id="login" class="login">login</button>
+        <button id="register" class = "register">register</button>
+
         <h1>Your Calendar</h1>
         <h3 id="month_label"></h3>
         <button id="prev_month_btn">prev month</button>
@@ -22,6 +26,15 @@
                 <input type="text" name="start_date" id="start_date" placeholder="start date and time" required><br> 
                 <input type="text" name="end_date" id="end_date"placeholder="end date and time" required><br> 
                 <input type="text" name="location" id="location" placeholder="location" required><br>
+                <input type="submit" name="submit" id = "submit" value="Add Event"><br><br>
+            </div>
+        </div>
+
+        <div id="registering">
+            <div id="popUpRegister"></div>
+            <div id="new_event">
+                <input type="text" name="username" id="username" placeholder="username" required><br> 
+                <input type="password" name="password" id="password" placeholder="password" required><br> 
                 <input type="submit" name="submit" id = "submit" value="Add Event"><br><br>
             </div>
         </div>
@@ -56,5 +69,27 @@
         updateCalendar(); 
         document.getElementById("month_label").innerHTML = getMonthName() +" "+currentMonth.year;
     }, false);
+
+   
+    document.getElementById("login").addEventListener("click", function(){
+       
+    }, false);
+
+    document.getElementById("register").addEventListener("click", function(){
+        $('#popUpRegister').html('<br><h3>register</h3>');
+        $('#username').val("");
+        $('#password').val("");
+        $('#submit').val('register');
+        $('#registering').dialog();
+        $('#calendar').css('opacity', '.75');
+
+        $('#registering').on('dialogclose', function(event) {
+         $('#calendar').css('opacity', '1');
+        });
+        
+    }, false);
+
+
+    
 
 </script>
