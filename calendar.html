@@ -14,7 +14,7 @@
         <button id="login" class="login">login</button>
         <button id="register" class = "register">register</button>
 
-        <h1 id="header"> Calendar</h1>
+        <h1 id="header">Calendar</h1>
         <h3 id="month_label"></h3>
         <button id="prev_month_btn">prev month</button>
         <button id="next_month_btn">next month</button>
@@ -62,6 +62,7 @@
 </html>
 
 <script>
+    var username = "";
 
     var currentMonth = new Month(2018, 9); // current month is October 2018
     document.getElementById("month_label").innerHTML = getMonthName()+" "+currentMonth.year;
@@ -83,12 +84,12 @@
     document.getElementById("login").addEventListener("click", function(){
         $('#popUpLogin').html('<br><h3>login</h3>');
         $('#username1').val("");
-        $('#password1').val(""); //encrypt password here
+        $('#password1').val(""); 
         $('#logmein').val('login');
         $('#loggingin').dialog();
         $('#calendar').css('opacity', '.75');
     
-        document.getElementById('logmein').addEventListener("click", function(){ //this isnt working and idk why
+        document.getElementById('logmein').addEventListener("click", function(){ 
                 let loginInfo = [$('#username1').val(), $('#password1').val()];
                 checkingUser(loginInfo);
             }, false);
@@ -100,8 +101,6 @@
         }, false);
 
     function checkingUser(loginInfo){
-   // $('#popUpRegister').dialog('close');
-        
         $('#popUpLogin').closest('.ui-dialog-content').dialog('close');
         $.ajax({
             type: 'POST',
@@ -110,61 +109,58 @@
             success: function(response) {
                 console.log(response)
                 if (response === "true"){
-                    const logged_in_user = loginInfo[0];
-                    loggedIn(logged_in_user);
+                    username = loginInfo[0];
+                    loggedIn();
                 } else{
                     alert("login failed");
                 }
             }
-        });
-        
-        }
+        });    
+    }
 
 
-    function loggedIn(logged_in_user){
-        $('#header').prepend(logged_in_user);
-        $('#idlogmein').css('display', 'none');
-        $('#registerme').css('display', 'none');
+    function loggedIn(){
+        $('#header').html(username+"'s Calendar");
+        $('#login').css('display', 'none');
+        $('#register').css('display', 'none');
     }
     
     
     //registration pop up
    document.getElementById("register").addEventListener("click", function(){
     
-    $('#popUpRegister').html('<br><h3>register</h3>');
-    $('#username').val("");
-    $('#password').val(""); //encrypt password here
-    $('#register').val('');
-    $('#registering').dialog();
-    $('#calendar').css('opacity', '.75');
-    // let passwordHash = require('password-hash');
-    // let hashedPassword = passwordHash.generate($('#password').val());
-    document.getElementById('registerme').addEventListener("click", function(){ //this isnt working and idk why
-        $('#password').val()
-        let registration = [$('#username').val(), $('#password').val()];
-        sendNewUser(registration);
-    },false)
+        $('#popUpRegister').html('<br><h3>register</h3>');
+        $('#username').val("");
+        $('#password').val(""); //encrypt password here
+        $('#register').val('');
+        $('#registering').dialog();
+        $('#calendar').css('opacity', '.75');
+        
+        document.getElementById('registerme').addEventListener("click", function(){ 
+            $('#password').val()
+            let registration = [$('#username').val(), $('#password').val()];
+            sendNewUser(registration);
+        },false)
 
-    $('#registering').on('dialogclose', function(event) {
-        $('#calendar').css('opacity', '1');
-    });
+        $('#registering').on('dialogclose', function(event) {
+            $('#calendar').css('opacity', '1');
+        });
+
+        alert("successful registration, click login to login");
     
     }, false);
 
 
 function sendNewUser(registration){
-   // $('#popUpRegister').dialog('close');
     $('#popUpRegister').closest('.ui-dialog-content').dialog('close');
     $.ajax({
         type: 'POST',
-        url: 'newUser.php', //gotta make this page
+        url: 'newUser.php', 
         data: { username: registration[0], password: registration[1] },
         success: function(response) {
             console.log(response);
         }
     });
-
-updateCalendar();
 }
 
 

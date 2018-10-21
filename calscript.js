@@ -80,8 +80,8 @@ function sendNewEvent(form_contents){ // this sends the form contents to php whi
 
 function displayEvents(){ // display events from SQL
     let xmlHttp = new XMLHttpRequest();
-    // xmlHttp.open("GET", "http://ec2-18-223-135-67.us-east-2.compute.amazonaws.com/getEvents.php", true); //leela's
-    xmlHttp.open("GET", "http://ec2-18-207-202-216.compute-1.amazonaws.com/~gdlaming/getEvents.php", true); //gillians
+    xmlHttp.open("GET", "http://ec2-18-223-135-67.us-east-2.compute.amazonaws.com/getEvents.php", true); //leela's
+    //xmlHttp.open("GET", "http://ec2-18-207-202-216.compute-1.amazonaws.com/~gdlaming/getEvents.php", true); //gillians
     
     // on load
     xmlHttp.addEventListener('load', function(e){
@@ -104,7 +104,7 @@ function displayEvents(){ // display events from SQL
                 if (time[0] == 0)
                     time = time.substring(1);
                 
-                $('#'+date).append("<h6 class='time' id='"+time+"'>"+time+"</h6><p class='event_name' event_id='"+event_id+"' id='"+parsed[i].event_name+"' onclick='editEvent(this)'>"+parsed[i].event_name+"<i id='"+loc+"'> at "+loc+"</i></p>");
+                $('#'+date).append("<h6 class='time' id='"+time+"'>"+time+"</h6><p class='event_name' id='"+parsed[i].event_name+"' onclick='editEvent(this)'>"+parsed[i].event_name+"<i id='"+loc+"'> at "+loc+"</i><i id='"+event_id+"'></i></p>");
                 $('#'+date+" h6").first().css({"margin-bottom": "-40px"});
                 $('#'+date+" img").first().css({"margin-bottom": "-20px","top": "0px"});
             }
@@ -123,7 +123,7 @@ function editEvent(event){ // pulls up dialog box for editing event
     let this_name = event.id;
     let this_time = event.parentNode.childNodes[2].id;
     let this_loc = event.parentNode.childNodes[3].childNodes[1].id;
-    let this_event_id = event.attr('event_id'); // not working
+    let this_event_id = event.parentNode.childNodes[3].childNodes[2].id; // not working
     console.log(this_event_id);
     $('#popUpHeader').html('<br><h3>edit event on '+this_date+'</h3><button id="delete_event" value="'+this_name+'">Delete Event</button>');
     $('#new_event').attr('id', 'edit_event');
