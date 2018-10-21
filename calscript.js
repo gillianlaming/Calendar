@@ -22,7 +22,7 @@ function updateCalendar(){
         i++;
     }
     displayEvents();
-    getUser();
+    
     // addListeners(document.getElementsByClassName("day_this_month"));
 }
 

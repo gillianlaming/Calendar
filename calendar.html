@@ -44,7 +44,6 @@
                 <div id="existing_user">
                     <input type="text" name="username1" id="username1" placeholder="username" required><br> 
                     <input type="password" name="password1" id="password1" placeholder="password" required><br> 
-                    <input type="hidden" name="token" value="<?php echo $_SESSION['token'];?>" />
                     <input type="submit" name="logmein" id = "logmein" value="login"><br><br>
                 </div>
             </div>
@@ -112,27 +111,10 @@
                 console.log(response);
             }
         });
-        updateCalendar();
+        
         }
 
-    function getUser(){
-        let xmlHttp = new XMLHttpRequest();
-        xmlHttp.open("POST", "http://ec2-18-207-202-216.compute-1.amazonaws.com/~gdlaming/checkUser.php", true); //gillians
-
-        xmlHttp.addEventListener('load', function(e){
-       if (xmlHttp.status == 200){
-            let response = xmlHttp.responseText; // get json
-            let parsed = JSON.parse(response); // parse json
-            console.log("parsed")
-            for (let i =0; i<parsed.length; i++){
-                console.log("entered")
-                let username = parsed[i].start_date.split(" ")[0];
-                let password = parsed[i].start_date.split(" ")[1];
-                console.log(username);
-            }
-       } 
-        },)
-    }
+    
     
     //registration pop up
    document.getElementById("register").addEventListener("click", function(){
