@@ -38,6 +38,15 @@
                 <input type="submit" name="registerme" id = "registerme" value="register"><br><br>
             </div>
         </div>
+
+        <div id="loggingin">
+                <div id="popUpLogin"></div>
+                <div id="existing_user">
+                    <input type="text" name="username1" id="username1" placeholder="username" required><br> 
+                    <input type="password" name="password1" id="password1" placeholder="password" required><br> 
+                    <input type="submit" name="logmein" id = "logmein" value="login"><br><br>
+                </div>
+            </div>
        
         <table id="calendar">
             <tr>
@@ -70,10 +79,42 @@
         document.getElementById("month_label").innerHTML = getMonthName() +" "+currentMonth.year;
     }, false);
 
-   
+   //login popup
     document.getElementById("login").addEventListener("click", function(){
-       
-    }, false);
+        $('#popUpLogin').html('<br><h3>login</h3>');
+        $('#username1').val("");
+        $('#password1').val(""); //encrypt password here
+        $('#logmein').val('login');
+        $('#loggingin').dialog();
+        $('#calendar').css('opacity', '.75');
+    
+        document.getElementById('logmein').addEventListener("click", function(){ //this isnt working and idk why
+                let loginInfo = [$('#username1').val(), $('#password1').val()];
+                checkingUser(loginInfo);
+            }, false);
+        
+        $('#loggingin').on('dialogclose', function(event) {
+            $('#calendar').css('opacity', '1');
+         });
+
+        }, false);
+
+    function checkingUser(loginInfo){
+   // $('#popUpRegister').dialog('close');
+        $('#popUpLogin').closest('.ui-dialog-content').dialog('close');
+        console.log("im here")
+        $.ajax({
+            type: 'POST',
+            url: 'checkUser.php', //gotta make this page
+            data: { username: loginInfo[0], password: loginInfo[1] },
+            success: function(response) {
+                console.log(response);
+            }
+        });
+
+        updateCalendar();
+        }
+
 
     //registration pop up
    document.getElementById("register").addEventListener("click", function(){
