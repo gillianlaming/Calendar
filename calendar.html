@@ -35,7 +35,7 @@
             <div id="new_event">
                 <input type="text" name="username" id="username" placeholder="username" required><br> 
                 <input type="password" name="password" id="password" placeholder="password" required><br> 
-                <input type="submit" name="submit" id = "submit" value="Add Event"><br><br>
+                <input type="submit" name="register" id = "register" value="register"><br><br>
             </div>
         </div>
        
@@ -75,19 +75,41 @@
        
     }, false);
 
-    document.getElementById("register").addEventListener("click", function(){
-        $('#popUpRegister').html('<br><h3>register</h3>');
-        $('#username').val("");
-        $('#password').val("");
-        $('#submit').val('register');
-        $('#registering').dialog();
-        $('#calendar').css('opacity', '.75');
+    //registration pop up
+   document.getElementById("register").addEventListener("click", function(){
+    $('#popUpRegister').html('<br><h3>register</h3>');
+    $('#username').val("");
+    $('#password').val(""); //encrypt password here
+    $('#register').val('register');
+    $('#registering').dialog();
+    $('#calendar').css('opacity', '.75');
 
-        $('#registering').on('dialogclose', function(event) {
-         $('#calendar').css('opacity', '1');
-        });
-        
+    document.getElementById('submit').addEventListener("click", function(){
+    let registration = [$('#username').val(), $('#password').val()];
+    sendNewEvent(registration);
     }, false);
+
+    $('#registering').on('dialogclose', function(event) {
+     $('#calendar').css('opacity', '1');
+    }, false);
+    
+    }, false);
+
+
+function newUser(registration){
+    $('#popUpRegister').dialog('close');
+
+    $.ajax({
+        type: 'POST',
+        url: 'newUser.php', //gotta make this page
+        data: { username: registration[0], password: registration[1] },
+        success: function(response) {
+            console.log(response);
+        }
+    });
+
+updateCalendar();
+}
 
 
     
