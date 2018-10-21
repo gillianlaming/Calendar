@@ -32,10 +32,10 @@
 
         <div id="registering">
             <div id="popUpRegister"></div>
-            <div id="new_event">
+            <div id="new_user">
                 <input type="text" name="username" id="username" placeholder="username" required><br> 
                 <input type="password" name="password" id="password" placeholder="password" required><br> 
-                <input type="submit" name="register" id = "register" value="register"><br><br>
+                <input type="submit" name="registerme" id = "registerme" value="register"><br><br>
             </div>
         </div>
        
@@ -53,7 +53,7 @@
 </html>
 
 <script>
-    
+
     var currentMonth = new Month(2018, 9); // current month is October 2018
     document.getElementById("month_label").innerHTML = getMonthName()+" "+currentMonth.year;
     updateCalendar(); // show the calendar
@@ -77,28 +77,34 @@
 
     //registration pop up
    document.getElementById("register").addEventListener("click", function(){
+    
     $('#popUpRegister').html('<br><h3>register</h3>');
     $('#username').val("");
     $('#password').val(""); //encrypt password here
-    $('#register').val('register');
+    $('#register').val('');
     $('#registering').dialog();
     $('#calendar').css('opacity', '.75');
+    // let passwordHash = require('password-hash');
+    // let hashedPassword = passwordHash.generate($('#password').val());
+    document.getElementById('registerme').addEventListener("click", function(){ //this isnt working and idk why
+        $('#password').val()
+        let registration = [$('#username').val(), $('#password').val()];
+        sendNewUser(registration);
+    });
 
-    document.getElementById('submit').addEventListener("click", function(){
-    let registration = [$('#username').val(), $('#password').val()];
-    sendNewEvent(registration);
-    }, false);
 
     $('#registering').on('dialogclose', function(event) {
-     $('#calendar').css('opacity', '1');
-    }, false);
+        $('#calendar').css('opacity', '1');
+        console.log("here 4")
+    });
     
     }, false);
 
 
-function newUser(registration){
-    $('#popUpRegister').dialog('close');
-
+function sendNewUser(registration){
+   // $('#popUpRegister').dialog('close');
+    $('#popUpRegister').closest('.ui-dialog-content').dialog('close');
+    console.log("im here")
     $.ajax({
         type: 'POST',
         url: 'newUser.php', //gotta make this page
