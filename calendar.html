@@ -162,8 +162,17 @@ function sendNewUser(registration){
         }
     });
 }
+//https://stackoverflow.com/questions/30529929/how-do-i-pass-my-access-token-via-javascript-with-identityserver3 
+function getAccessToken() {
+    var returnVal = "";
 
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "http://localhost:61207/Home/GetAccessToken", false);
+    xhr.send();
+    returnVal = xhr.responseText;
 
+    return returnVal;
+}
 
 
     
