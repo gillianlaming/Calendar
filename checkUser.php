@@ -18,6 +18,23 @@
                 break;
             }
         }
+        if ($user_exists == true){
+           //check password
+           $myArray = array();
+            if ($result = $mysqli->query("select username, password_hash, from users order by username")) {
+        
+                while($row = $result->fetch_array(MYSQL_ASSOC)) {
+                        $myArray[] = $row;
+                }
+                echo json_encode($myArray);
+            }
+        
+    $result->close();
+        }
+        else{
+            echo "false";
+        }
         $current_users->close();
+        $mysqli->close();
    
 ?>

@@ -78,7 +78,7 @@ function sendNewEvent(form_contents){ // this sends the form contents to php whi
 
 
 function displayEvents(){ // display events from SQL
-    var xmlHttp = new XMLHttpRequest();
+    let xmlHttp = new XMLHttpRequest();
     // xmlHttp.open("GET", "http://ec2-18-223-135-67.us-east-2.compute.amazonaws.com/getEvents.php", true); //leela's
     xmlHttp.open("GET", "http://ec2-18-207-202-216.compute-1.amazonaws.com/~gdlaming/getEvents.php", true); //gillians
     
@@ -88,7 +88,7 @@ function displayEvents(){ // display events from SQL
             let response = xmlHttp.responseText; // get json
             let parsed = JSON.parse(response); // parse json
 
-            for (var i =0; i<parsed.length; i++){
+            for (let i =0; i<parsed.length; i++){
                 let date = parsed[i].start_date.split(" ")[0];
                 let time = parsed[i].start_date.split(" ")[1];
                 let loc = parsed[i].location;
