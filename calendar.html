@@ -66,7 +66,7 @@
 
     var currentMonth = new Month(2018, 9); // current month is October 2018
     document.getElementById("month_label").innerHTML = getMonthName()+" "+currentMonth.year;
-    updateCalendar(); // show the calendar
+    window.addEventListener('load', updateCalendar, false); // show the calendar
     // Change the month when the "next" button is pressed
     document.getElementById("next_month_btn").addEventListener("click", function(){
         currentMonth = currentMonth.nextMonth();

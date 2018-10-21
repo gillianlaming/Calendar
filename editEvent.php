@@ -5,10 +5,6 @@
     $end_date = $_POST['end_date'];
     $loc = $_POST['location'];
     $event_id = $_POST['event_id'];
-    
-    if(!hash_equals($_SESSION['token'], $_POST['token'])){
-        die("Request forgery detected");
-    }
 
     $edit_event = $mysqli->prepare("update events set event_name = ?, start_date = ?, end_date = ?, location = ? WHERE event_id = ?");
     if(!$edit_event){
