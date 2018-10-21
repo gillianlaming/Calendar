@@ -14,7 +14,7 @@
         <button id="login" class="login">login</button>
         <button id="register" class = "register">register</button>
 
-        <h1>Your Calendar</h1>
+        <h1 id="header"> Calendar</h1>
         <h3 id="month_label"></h3>
         <button id="prev_month_btn">prev month</button>
         <button id="next_month_btn">next month</button>
@@ -108,12 +108,23 @@
             url: 'checkUser.php', 
             data: { username: loginInfo[0], password: loginInfo[1] },
             success: function(response) {
-                console.log(response);
+                if (response === true){
+                    const logged_in_user = loginInfo[0];
+                    loggedIn(logged_in_user);
+                } else{
+                    alert("login failed");
+                }
             }
         });
         
         }
 
+
+    function loggedIn(logged_in_user){
+        $('#header').prepend(logged_in_user);
+        $('#idlogmein').css('display', 'none');
+        $('#registerme').css('display', 'none');
+    }
     
     
     //registration pop up
