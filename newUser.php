@@ -5,6 +5,8 @@
     }
     if(isset($_POST['username'])){
         $password = $_POST['password'];
+        $salt = random_bytes(5);
+        var_dump(bin2hex($bytes));
         $hash = password_hash($password, PASSWORD_BCRYPT); //must encrypt the password
     }
    
