@@ -1,12 +1,12 @@
 function updateCalendar(){
     $('.week').empty();
-	var weeks = currentMonth.getWeeks();
+	let weeks = currentMonth.getWeeks();
     let i = 1;
-	for(var w in weeks){
-		var days = weeks[w].getDates();
+	for(let w in weeks){
+		let days = weeks[w].getDates();
 		// days contains normal JavaScript Date objects.
 		let this_week = "week" + i;
-		for(var d in days){
+		for(let d in days){
             let this_date = days[d].getDate();
             let formatted_date = days[d].getFullYear() + "-" + (days[d].getMonth() + 1) + "-" + this_date;
 
@@ -75,7 +75,7 @@ function loggedIn(){
     $('#logout').css('display', 'block');
 
     let images = document.getElementsByClassName('plus');
-    for (var i =0; i<images.length; i++){
+    for (let i =0; i<images.length; i++){
         images[i].style.display = 'block';
         images[i].style.cursor = 'pointer';
     }
@@ -84,7 +84,7 @@ function loggedIn(){
 }
 
 function getMonthName(){
-    var monthNum = currentMonth.month;
+    let monthNum = currentMonth.month;
     if (monthNum == 0){ return 'January';} if (monthNum == 1){ return 'February';}if (monthNum == 2){ return 'March';}if (monthNum == 3){ return 'April';}
     if (monthNum == 4){ return 'May';}if (monthNum == 5){ return 'June';}if (monthNum == 6){ return 'July';}if (monthNum == 7){ return 'August';}
     if (monthNum == 8){ return 'September';}if (monthNum == 9){ return 'October';}if (monthNum == 10){ return 'November';}if (monthNum == 11){ return 'December';}

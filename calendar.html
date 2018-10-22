@@ -67,7 +67,7 @@
 </html>
 
 <script>
-    var username = "";
+    let username = "";
 
     let currentMonth = new Month(2018, 9); // current month is October 2018
     document.getElementById("month_label").innerHTML = getMonthName()+" "+currentMonth.year;
@@ -194,9 +194,9 @@ function sendNewUser(registration){
 }
 //https://stackoverflow.com/questions/30529929/how-do-i-pass-my-access-token-via-javascript-with-identityserver3 
 function getAccessToken() {
-    var returnVal = "";
+    let returnVal = "";
 
-    var xhr = new XMLHttpRequest();
+    let xhr = new XMLHttpRequest();
     xhr.open("GET", "http://localhost:61207/Home/GetAccessToken", false);
     xhr.send();
     returnVal = xhr.responseText;
