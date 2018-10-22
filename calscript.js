@@ -69,8 +69,9 @@ function displayEvents(){ // display events from SQL
 
 function loggedIn(){
     $('#header').html(username+"'s Calendar");
-    $('#login').css('display', 'none');
     $('#register').css('display', 'none');
+    $('#login').css('display', 'none');
+    $('#logout').css('display', 'block');
 
     let images = document.getElementsByClassName('plus');
     for (var i =0; i<images.length; i++){
@@ -78,7 +79,7 @@ function loggedIn(){
         images[i].style.cursor = 'pointer';
     }
 
-    $('#month_label').append("<p>click the plus sign to add an event on that day, or click your event to edit it<p>");
+    $('#label').html("click the plus sign to add an event on that day, or click your event to edit it");
 }
 
 function getMonthName(){

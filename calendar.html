@@ -13,8 +13,9 @@
         
         <button id="login" class="login">login</button>
         <button id="register" class = "register">register</button>
-
+        <button id="logout" class="logout">logout</button>
         <h1 id="header">Calendar</h1>
+        <p id="label"></p>
         <h3 id="month_label"></h3>
         <button id="prev_month_btn">prev month</button>
         <button id="next_month_btn">next month</button>
@@ -78,6 +79,11 @@
         currentMonth = currentMonth.prevMonth();
         updateCalendar(); 
         document.getElementById("month_label").innerHTML = getMonthName() +" "+currentMonth.year;
+    }, false);
+
+     
+    document.getElementById("logout").addEventListener("click", function(){
+        location.reload();
     }, false);
 
    //login popup
