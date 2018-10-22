@@ -19,12 +19,13 @@ function updateCalendar(){
         }
         i++;
     }
-    console.log("calendar updated");
+    if (username != ''){
+        loggedIn();
+    }
     displayEvents();
 }
 
 function displayEvents(){ // display events from SQL
-    console.log("displaying events");
     let xmlHttp = new XMLHttpRequest();
     //xmlHttp.open("GET", "http://ec2-18-223-135-67.us-east-2.compute.amazonaws.com/getEvents.php", true); //leela's
     xmlHttp.open("GET", "http://ec2-18-207-202-216.compute-1.amazonaws.com/~gdlaming/getEvents.php", true); //gillians
@@ -69,8 +70,9 @@ function displayEvents(){ // display events from SQL
 
 function loggedIn(){
     $('#header').html(username+"'s Calendar");
-    $('#login').css('display', 'none');
     $('#register').css('display', 'none');
+    $('#login').css('display', 'none');
+    $('#logout').css('display', 'block');
 
     let images = document.getElementsByClassName('plus');
     for (var i =0; i<images.length; i++){
@@ -78,7 +80,7 @@ function loggedIn(){
         images[i].style.cursor = 'pointer';
     }
 
-    $('#month_label').append("<p>click the plus sign to add an event on that day, or click your event to edit it<p>");
+    $('#label').html("click the plus sign to add an event on that day, or click your event to edit it");
 }
 
 function getMonthName(){
@@ -99,7 +101,7 @@ function addEvent(day) {  // this function makes the dialog box pop up, and adds
     $('#submit').val('Add Event');
     $('#popUp').dialog();
     $('#calendar').css('opacity', '.75');
-
+    
     document.getElementById('submit').addEventListener("click", function(){
         if (username != ''){
             let form_contents = [$('#event_name').val(), $('#start_date').val(), $('#end_date').val(), $('#location').val(), username];
@@ -107,7 +109,8 @@ function addEvent(day) {  // this function makes the dialog box pop up, and adds
         } else {
             alert("you are not logged in");
         }
-    });
+    }, false);
+
     $('#popUp').on('dialogclose', function(event) {
         $('#calendar').css('opacity', '1');
     });
@@ -121,7 +124,7 @@ function sendNewEvent(form_contents){ // this sends the form contents to php whi
         url: 'newEvent.php',
         data: { event_name: form_contents[0], start_date: form_contents[1], end_date: form_contents[2], location: form_contents[3], username: form_contents[4] },
         success: function(response) {
-            console.log("new event added to SQL");
+            $('#submit').replaceWith($('#submit').clone());
             displayEvents();
         }
     });
@@ -152,12 +155,13 @@ function editEvent(event){ // pulls up dialog box for editing event
         document.getElementById('submit').addEventListener("click", function(){
             let form_contents = [$('#event_name').val(), $('#start_date').val(), $('#end_date').val(), $('#location').val(), this_event_id];
             editThisEvent(form_contents);
-        });
+        }, false);
         document.getElementById("delete_event").addEventListener("click", function(){
-            console.log(this_event_id);
-            let info = this_event_id;
-            deleteMe(info)
-        })
+            deleteMe(this_event_id);
+
+            $('#'+this_date+" h6").first().css({"margin-bottom": "-10px"});
+            $('#'+this_date+" img").first().css({"margin-bottom": "0","top": "-30px"});
+        }, false);
     } else {
         alert("you can\'t edit "+this_author+"\'s event");
     }
@@ -171,9 +175,24 @@ function editThisEvent(form_contents) {
         url: 'editEvent.php',
         data: { event_name: form_contents[0], start_date: form_contents[1], end_date: form_contents[2], location: form_contents[3], event_id: form_contents[4] },
         success: function(response) {
-            console.log("event edited in SQL");
+            $('#submit').replaceWith($('#submit').clone());
             displayEvents();
         }
     });
     
+}
+
+function deleteMe(info){
+    $('#popUp').dialog('close');
+    $.ajax({
+        type: 'POST',
+        url: 'deleteEvent.php', 
+        data: { event_id: info },
+        success: function(response) {
+            if (response == "true"){
+                $('#delete_event').replaceWith($('#delete_event').clone());
+                displayEvents();
+            }
+        }
+    });
 }
