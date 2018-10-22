@@ -42,12 +42,16 @@
 
         <div id="loggingin">
                 <div id="popUpLogin"></div>
-                <div id="existing_user">
                     <input type="text" name="username1" id="username1" placeholder="username" required><br> 
                     <input type="password" name="password1" id="password1" placeholder="password" required><br> 
                     <input type="submit" name="logmein" id = "logmein" value="login"><br><br>
-                </div>
-            </div>
+        </div>
+        
+        <div id="loggingout">
+            <div id="popUpLogout"></div>
+                <input type="submit" name="yesLogout" id="yesLogout" value="logout" required><br>
+                <input type="submit" name="cancel" id="cancel" value="cancel" required><br><br>
+        </div>
        
         <table id="calendar">
             <tr>
@@ -81,11 +85,33 @@
         document.getElementById("month_label").innerHTML = getMonthName() +" "+currentMonth.year;
     }, false);
 
-     
+     //logout popup
     document.getElementById("logout").addEventListener("click", function(){
         username = '';
-        location.reload();
-    }, false);
+        $('#popUpLogout').html('<br><h3>are you sure you want to logout?</h3>');
+        $('#yesLogout').val('logout');
+        $('#cancel').val('cancel');
+        $('#loggingout').dialog();
+        $('#calendar').css('opacity', '.75');
+        $('#loggingout').on('dialogclose', function(event) {
+            $('#calendar').css('opacity', '1');
+         });
+        //logout if selected
+        document.getElementById("yesLogout").addEventListener("click", function(){
+            location.reload();
+        }, false);
+
+        document.getElementById("cancel").addEventListener("click", function(){
+            $('#loggingout').dialog("close");
+            $('#calendar').css('opacity', '1');
+         
+        }, false)
+
+        
+
+        }, false)
+
+   
 
    //login popup
     document.getElementById("login").addEventListener("click", function(){
