@@ -39,8 +39,6 @@
             $get_hash->fetch();
             $get_hash->close();
 
-            
-            
             if (password_verify($password, $hash)){
                 echo ("true");
             }

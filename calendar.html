@@ -127,28 +127,27 @@
 
     
     //registration pop up
-   document.getElementById("register").addEventListener("click", function(){
+   document.getElementById("register").addEventListener("click", register, false);
+
+function register(){
     
-        $('#popUpRegister').html('<br><h3>register</h3>');
-        $('#username').val("");
-        $('#password').val(""); 
-        $('#register').val('');
-        $('#registering').dialog();
-        $('#calendar').css('opacity', '.75');
+    $('#popUpRegister').html('<br><h3>register</h3>');
+    $('#username').val("");
+    $('#password').val(""); 
+    $('#register').val('');
+    $('#registering').dialog();
+    $('#calendar').css('opacity', '.75');
+    
+    document.getElementById('registerme').addEventListener("click", function(){ 
         
-        document.getElementById('registerme').addEventListener("click", function(){ 
-            
-            let registration = [$('#username').val(), $('#password').val()];
-            sendNewUser(registration);
-            },false)
+        let registration = [$('#username').val(), $('#password').val()];
+        sendNewUser(registration);
+        },false)
 
-        $('#registering').on('dialogclose', function(event) {
-            $('#calendar').css('opacity', '1');
-        });
-        
-       
-    }, false);
-
+    $('#registering').on('dialogclose', function(event) {
+        $('#calendar').css('opacity', '1');
+    });
+}
 
 function sendNewUser(registration){
     $('#popUpRegister').closest('.ui-dialog-content').dialog('close');
@@ -157,12 +156,12 @@ function sendNewUser(registration){
         url: 'newUser.php', 
         data: { username: registration[0], password: registration[1] },
         success: function(response) {
-            console.log(response);
             if(response){
                 alert("successful registration, click login to login");
             }
             else{
-                alert ("unsuccessful login");
+                alert ("username exists, please choose another");
+                register();
             }
         }
     });
