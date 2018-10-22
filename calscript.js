@@ -93,8 +93,6 @@ function getMonthName(){
 }
 
 function addEvent(day) {  // this function makes the dialog box pop up, and adds listener for submit
-    console.log("addEvent called");
-    
     let this_date = day.parentNode.id;
     $('#popUpHeader').html('<br><h3>add an event on '+this_date+'</h3>');
     $('#start_date').val(this_date+" 0:00:00");
@@ -105,10 +103,8 @@ function addEvent(day) {  // this function makes the dialog box pop up, and adds
     $('#submit').val('Add Event');
     $('#popUp').dialog();
     $('#calendar').css('opacity', '.75');
-
     
     document.getElementById('submit').addEventListener("click", function(){
-        console.log("submit clicked");
         if (username != ''){
             let form_contents = [$('#event_name').val(), $('#start_date').val(), $('#end_date').val(), $('#location').val(), username];
             sendNewEvent(form_contents);
@@ -116,7 +112,6 @@ function addEvent(day) {  // this function makes the dialog box pop up, and adds
             alert("you are not logged in");
         }
     }, false);
-    console.log("listener added");
 
     $('#popUp').on('dialogclose', function(event) {
         $('#calendar').css('opacity', '1');
@@ -125,17 +120,13 @@ function addEvent(day) {  // this function makes the dialog box pop up, and adds
 
 function sendNewEvent(form_contents){ // this sends the form contents to php which sends to SQL
     $('#popUp').dialog('close');
-    
-
 
     $.ajax({
         type: 'POST',
         url: 'newEvent.php',
         data: { event_name: form_contents[0], start_date: form_contents[1], end_date: form_contents[2], location: form_contents[3], username: form_contents[4] },
         success: function(response) {
-            console.log("new event added to SQL");
             $('#submit').replaceWith($('#submit').clone());
-            console.log("listener removed");
             displayEvents();
         }
     });
