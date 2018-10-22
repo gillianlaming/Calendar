@@ -16,6 +16,7 @@
         <button id="logout" class="logout">logout</button>
         <h1 id="header">Calendar</h1>
         <p id="label"></p>
+        <div id="buttons"></div>
         <h3 id="month_label"></h3>
         <button id="prev_month_btn">prev month</button>
         <button id="next_month_btn">next month</button>
@@ -52,6 +53,19 @@
                 <input type="submit" name="yesLogout" id="yesLogout" value="logout" required><br>
                 <input type="submit" name="cancel" id="cancel" value="cancel" required><br><br>
         </div>
+
+        <div id="categories">
+            <input type="submit" name="addCategory" id="addCategory" value="addCategory" style=
+            "position:absolute;
+            top:8px;
+            left: 10px;"><br> 
+        </div>
+
+        <div id="addingCategory">
+            <div id="popUpCategory"></div>
+            <input type="text" name="newCategory" id="newCategory" value="newCategory" required><br>
+            <input type="submit" name="addme" id="addme" required><br><br>
+        </div>
        
         <table id="calendar">
             <tr>
@@ -68,6 +82,7 @@
 
 <script>
     let username = "";
+    let existsCategory = "false";
 
     let currentMonth = new Month(2018, 9); // current month is October 2018
     document.getElementById("month_label").innerHTML = getMonthName()+" "+currentMonth.year;
@@ -192,6 +207,26 @@ function sendNewUser(registration){
         }
     });
 }
+
+document.getElementById("addCategory").addEventListener("click", function(){
+    $('#popUpCategory').html('<br><h3>add a category</h3>');
+        $('#newCategory').val(""); 
+        $('#addme').val('add');
+        $('#addingCategory').dialog();
+        $('#calendar').css('opacity', '.75');
+        $('#addingCategory').on('dialogclose', function(event) {
+            $('#calendar').css('opacity', '1');
+         });
+    document.getElementById("addme").addEventListener("click", function(){
+        let text =  $('#newCategory').val;
+        //$('#buttons').html("<label><input type=checkbox name=checkbox value=value>"+text+"</label>");
+        $('#addingCategory').dialog("close");
+            $('#calendar').css('opacity', '1');
+        existsCategory = "true";
+    }, false)
+}, false)
+
+
 //https://stackoverflow.com/questions/30529929/how-do-i-pass-my-access-token-via-javascript-with-identityserver3 
 function getAccessToken() {
     let returnVal = "";

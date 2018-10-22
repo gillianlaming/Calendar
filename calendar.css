@@ -75,6 +75,14 @@ p{
     border-radius: 15px;
 }
 
+#addingCategory{
+    display: none;
+    width: 100%;
+    background-color: #555;
+    color: #fff;
+    border-radius: 15px;
+}
+
 #popUp h3{
     font-size: 16px;
     margin-top: 0;
@@ -106,7 +114,11 @@ p{
     color: #ae184f;
 }
 
-
+.addCategory{
+    position:absolute;
+    top:8px;
+    left: 10px;
+}
 .login, .logout{ 
     position:absolute;
     top:10px;
@@ -123,8 +135,21 @@ p{
     display: none;
 }
 
+
 #label{
     margin-top: -20px;
     color: #ae184f;
     opacity: .7;
+}
+
+#buttons{
+    border-style: solid;
+    border-width: thin;
+    border-color: #ae184f;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top:8px;
+    left: 10px;
+    text-align: left;
 }
