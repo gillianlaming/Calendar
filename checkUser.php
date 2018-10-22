@@ -38,6 +38,7 @@
             $get_hash->bind_result($hash); // store in variable
             $get_hash->fetch();
             $get_hash->close();
+
             
             
             if (password_verify($password, $hash)){
