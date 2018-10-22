@@ -11,7 +11,7 @@ function updateCalendar(){
             let formatted_date = days[d].getFullYear() + "-" + (days[d].getMonth() + 1) + "-" + this_date;
 
             if (days[d].getMonth() == currentMonth.month){
-                $('#'+this_week).append("<td class='day_this_month' id="+formatted_date+"><h6 class='date'>"+this_date+"</h6><img src='plus.png' id='plus' onclick='addEvent(this)'></td>");
+                $('#'+this_week).append("<td class='day_this_month' id="+formatted_date+"><h6 class='date'>"+this_date+"</h6><img src='plus.png' class='plus' onclick='addEvent(this)'></td>");
             } else{
                 $('#'+this_week).append("<td class='day_wrong_month' id="+formatted_date+"><h6 class='date'>"+this_date+"</h6></td>");
             } 
@@ -26,8 +26,8 @@ function updateCalendar(){
 function displayEvents(){ // display events from SQL
     console.log("displaying events");
     let xmlHttp = new XMLHttpRequest();
-    //xmlHttp.open("GET", "http://ec2-18-223-135-67.us-east-2.compute.amazonaws.com/getEvents.php", true); //leela's
-    xmlHttp.open("GET", "http://ec2-18-207-202-216.compute-1.amazonaws.com/~gdlaming/getEvents.php", true); //gillians
+    xmlHttp.open("GET", "http://ec2-18-223-135-67.us-east-2.compute.amazonaws.com/getEvents.php", true); //leela's
+    //xmlHttp.open("GET", "http://ec2-18-207-202-216.compute-1.amazonaws.com/~gdlaming/getEvents.php", true); //gillians
 
     $('.event').remove();
 
@@ -67,6 +67,20 @@ function displayEvents(){ // display events from SQL
     xmlHttp.send(null);
 }
 
+function loggedIn(){
+    $('#header').html(username+"'s Calendar");
+    $('#login').css('display', 'none');
+    $('#register').css('display', 'none');
+
+    let images = document.getElementsByClassName('plus');
+    for (var i =0; i<images.length; i++){
+        images[i].style.display = 'block';
+        images[i].style.cursor = 'pointer';
+    }
+
+    $('#month_label').append("<p>click the plus sign to add an event on that day, or click your event to edit it<p>");
+}
+
 function getMonthName(){
     var monthNum = currentMonth.month;
     if (monthNum == 0){ return 'January';} if (monthNum == 1){ return 'February';}if (monthNum == 2){ return 'March';}if (monthNum == 3){ return 'April';}
@@ -87,8 +101,12 @@ function addEvent(day) {  // this function makes the dialog box pop up, and adds
     $('#calendar').css('opacity', '.75');
 
     document.getElementById('submit').addEventListener("click", function(){
-        let form_contents = [$('#event_name').val(), $('#start_date').val(), $('#end_date').val(), $('#location').val(), username];
-        sendNewEvent(form_contents);
+        if (username != ''){
+            let form_contents = [$('#event_name').val(), $('#start_date').val(), $('#end_date').val(), $('#location').val(), username];
+            sendNewEvent(form_contents);
+        } else {
+            alert("you are not logged in");
+        }
     });
     $('#popUp').on('dialogclose', function(event) {
         $('#calendar').css('opacity', '1');
@@ -135,6 +153,11 @@ function editEvent(event){ // pulls up dialog box for editing event
             let form_contents = [$('#event_name').val(), $('#start_date').val(), $('#end_date').val(), $('#location').val(), this_event_id];
             editThisEvent(form_contents);
         });
+        document.getElementById("delete_event").addEventListener("click", function(){
+            console.log(this_event_id);
+            let info = this_event_id;
+            deleteMe(info)
+        })
     } else {
         alert("you can\'t edit "+this_author+"\'s event");
     }

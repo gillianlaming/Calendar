@@ -241,23 +241,20 @@ input:hover{
 }
 
 
-#plus{
+.plus{
     display: none;
     height: 20px;
     position: relative;
     left: calc(90% - 10px);
     top: -30px;
-}
-
-.day_this_month:hover #plus{
-    cursor: pointer;
-    display: block;
+    opacity: .7;
 }
 
 .event_name:hover{
     cursor: pointer;
     color: #ae184f;
 }
+
 
 .login{ 
     position:absolute;
