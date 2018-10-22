@@ -110,35 +110,35 @@ function sendNewEvent(form_contents){ // this sends the form contents to php whi
     
 }
 
-function editEvent(event){ // pulls up dialog box for editing event
-    let this_time = event.childNodes[0].id;
-    let this_name = event.childNodes[1].id;
-    let this_date = event.parentNode.id;
-    let this_loc = event.childNodes[1].childNodes[1].id;
-    let this_event_id = event.childNodes[1].childNodes[2].id;
-    let this_author = event.childNodes[1].childNodes[3].id;
+// function editEvent(event){ // pulls up dialog box for editing event
+//     let this_time = event.childNodes[0].id;
+//     let this_name = event.childNodes[1].id;
+//     let this_date = event.parentNode.id;
+//     let this_loc = event.childNodes[1].childNodes[1].id;
+//     let this_event_id = event.childNodes[1].childNodes[2].id;
+//     let this_author = event.childNodes[1].childNodes[3].id;
 
-    if (username === this_author){
-        $('#popUpHeader').html('<br><h3>edit event on '+this_date+'</h3><button id="delete_event" value="'+this_name+'">Delete Event</button>');
-        $('#new_event').attr('id', 'edit_event');
-        $('#event_name').val(this_name);
-        $('#start_date').val(this_date+" "+this_time);
-        $('#end_date').val(this_date +" 23:00:00");
-        $('#location').val(this_loc);
-        $('#submit').val('Save Event');
-        $('#popUp').dialog();
-        $('#calendar').css('opacity', '.75');
-        $('#popUp').on('dialogclose', function(event) {
-            $('#calendar').css('opacity', '1');
-        });
-        document.getElementById('submit').addEventListener("click", function(){
-            let form_contents = [$('#event_name').val(), $('#start_date').val(), $('#end_date').val(), $('#location').val(), this_event_id];
-            editThisEvent(form_contents);
-        });
-    } else {
-        alert("you can\'t edit "+this_author+"\'s event");
-    }
-}
+//     if (username === this_author){
+//         $('#popUpHeader').html('<br><h3>edit event on '+this_date+'</h3><button id="delete_event" value="'+this_name+'">Delete Event</button>');
+//         $('#new_event').attr('id', 'edit_event');
+//         $('#event_name').val(this_name);
+//         $('#start_date').val(this_date+" "+this_time);
+//         $('#end_date').val(this_date +" 23:00:00");
+//         $('#location').val(this_loc);
+//         $('#submit').val('Save Event');
+//         $('#popUp').dialog();
+//         $('#calendar').css('opacity', '.75');
+//         $('#popUp').on('dialogclose', function(event) {
+//             $('#calendar').css('opacity', '1');
+//         });
+//         document.getElementById('submit').addEventListener("click", function(){
+//             let form_contents = [$('#event_name').val(), $('#start_date').val(), $('#end_date').val(), $('#location').val(), this_event_id];
+//             editThisEvent(form_contents);
+//         });
+//     } else {
+//         alert("you can\'t edit "+this_author+"\'s event");
+//     }
+// }
 
 function editThisEvent(form_contents) {
     $('#popUp').dialog('close');

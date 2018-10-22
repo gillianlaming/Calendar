@@ -4,24 +4,22 @@
 require 'calendar_database.php';
 
     $event_id = $_POST['event_id'];
-		//delete from databse
-    $delete_event = $mysqli->prepare("delete from events where event_id = ?");
-    if (!$delete_event){
-			printf("Query Prep Failed: %s\n", $mysqli->error);
-            exit;
-	}
-	$delete_event->bind_param('i', $event_id);
-    $delete_event->execute(); 
-    $delete_event->close();
+        //delete from databse
     
-	$delete = $mysqli->prepare("delete from events where id = ?");
+    $delete = $mysqli->prepare("delete from events where event_id = ?");
+    $worked = "true";
     if (!$delete){
-			printf("Query Prep Failed: %s\n", $mysqli->error);
+            printf("Query Prep Failed: %s\n", $mysqli->error);
+            $worked = "false";
             exit;
-	}
+    }
+    echo($worked);
+    
+
 	$delete->bind_param('i', $event_id);
     $delete->execute(); 
     $delete->close();
+    $mysqli->close();
 
 ?>
 </html>
