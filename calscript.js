@@ -20,6 +20,9 @@ function updateCalendar(){
         i++;
     }
     console.log("calendar updated");
+    if (username != ''){
+        loggedIn();
+    }
     displayEvents();
 }
 
@@ -156,6 +159,9 @@ function editEvent(event){ // pulls up dialog box for editing event
         });
         document.getElementById("delete_event").addEventListener("click", function(){
             deleteMe(this_event_id);
+
+            $('#'+this_date+" h6").first().css({"margin-bottom": "-10px"});
+            $('#'+this_date+" img").first().css({"margin-bottom": "0","top": "-30px"});
         })
     } else {
         alert("you can\'t edit "+this_author+"\'s event");
