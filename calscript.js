@@ -19,7 +19,6 @@ function updateCalendar(){
         }
         i++;
     }
-    console.log("calendar updated");
     if (username != ''){
         loggedIn();
     }
@@ -27,7 +26,6 @@ function updateCalendar(){
 }
 
 function displayEvents(){ // display events from SQL
-    console.log("displaying events");
     let xmlHttp = new XMLHttpRequest();
     xmlHttp.open("GET", "http://ec2-18-223-135-67.us-east-2.compute.amazonaws.com/getEvents.php", true); //leela's
     //xmlHttp.open("GET", "http://ec2-18-207-202-216.compute-1.amazonaws.com/~gdlaming/getEvents.php", true); //gillians
@@ -157,13 +155,13 @@ function editEvent(event){ // pulls up dialog box for editing event
         document.getElementById('submit').addEventListener("click", function(){
             let form_contents = [$('#event_name').val(), $('#start_date').val(), $('#end_date').val(), $('#location').val(), this_event_id];
             editThisEvent(form_contents);
-        });
+        }, false);
         document.getElementById("delete_event").addEventListener("click", function(){
             deleteMe(this_event_id);
 
             $('#'+this_date+" h6").first().css({"margin-bottom": "-10px"});
             $('#'+this_date+" img").first().css({"margin-bottom": "0","top": "-30px"});
-        })
+        }, false);
     } else {
         alert("you can\'t edit "+this_author+"\'s event");
     }
@@ -177,7 +175,7 @@ function editThisEvent(form_contents) {
         url: 'editEvent.php',
         data: { event_name: form_contents[0], start_date: form_contents[1], end_date: form_contents[2], location: form_contents[3], event_id: form_contents[4] },
         success: function(response) {
-            console.log("event edited in SQL");
+            $('#submit').replaceWith($('#submit').clone());
             displayEvents();
         }
     });
@@ -192,7 +190,7 @@ function deleteMe(info){
         data: { event_id: info },
         success: function(response) {
             if (response == "true"){
-                console.log('event deleted');
+                $('#delete_event').replaceWith($('#delete_event').clone());
                 displayEvents();
             }
         }
