@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang='en'>
 <?php
 require 'calendar_database.php';
 
@@ -22,4 +20,3 @@ require 'calendar_database.php';
     $mysqli->close();
 
 ?>
-</html>

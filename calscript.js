@@ -155,9 +155,7 @@ function editEvent(event){ // pulls up dialog box for editing event
             editThisEvent(form_contents);
         });
         document.getElementById("delete_event").addEventListener("click", function(){
-            console.log(this_event_id);
-            let info = this_event_id;
-            deleteMe(info)
+            deleteMe(this_event_id);
         })
     } else {
         alert("you can\'t edit "+this_author+"\'s event");
@@ -177,4 +175,19 @@ function editThisEvent(form_contents) {
         }
     });
     
+}
+
+function deleteMe(info){
+    $('#popUp').dialog('close');
+    $.ajax({
+        type: 'POST',
+        url: 'deleteEvent.php', 
+        data: { event_id: info },
+        success: function(response) {
+            if (response == "true"){
+                console.log('event deleted');
+                displayEvents();
+            }
+        }
+    });
 }

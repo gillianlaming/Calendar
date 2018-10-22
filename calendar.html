@@ -67,7 +67,7 @@
 
     let currentMonth = new Month(2018, 9); // current month is October 2018
     document.getElementById("month_label").innerHTML = getMonthName()+" "+currentMonth.year;
-    window.addEventListener('load', updateCalendar, false); // show the calendar
+    window.addEventListener('load', updateCalendar, false); // show the calendar on load
     // Change the month when the "next" button is pressed
     document.getElementById("next_month_btn").addEventListener("click", function(){
         currentMonth = currentMonth.nextMonth();
@@ -83,6 +83,7 @@
 
      
     document.getElementById("logout").addEventListener("click", function(){
+        username = '';
         location.reload();
     }, false);
 
@@ -177,25 +178,4 @@ function getAccessToken() {
 
     return returnVal;
 }
-
-function deleteMe(info){
-$('#popUpHeader').closest('.ui-dialog-content').dialog('close');
-        console.log(info);
-        $.ajax({
-            type: 'POST',
-            url: 'deleteEvent.php', 
-            data: { event_id: info },
-            success: function(response) {
-                //console.log(response)
-                if (response == "true"){
-                    alert("deletion successful")
-                    displayEvents();
-                } else{
-                    alert("deletion failed. sucks haha");
-                }
-            }
-        });
-}
-    
-
 </script>
