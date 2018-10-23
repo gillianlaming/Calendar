@@ -154,3 +154,7 @@ p{
 #colorLabel {
     margin-top: -40px;
 }
+
+button, input{
+    cursor: pointer;
+}
