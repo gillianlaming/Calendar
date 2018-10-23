@@ -105,7 +105,17 @@
          });
         //logout if selected
         document.getElementById("yesLogout").addEventListener("click", function(){
-            location.reload();
+            $.ajax({
+                url: 'logout.php', 
+                success: function(response) {
+                    console.log(response)
+                    if (response === "true"){
+                        console.log("logout successful")
+                    } else{
+                        alert("logout failed");
+                    }
+            }
+        });
         }, false);
 
         document.getElementById("cancel").addEventListener("click", function(){
@@ -115,6 +125,12 @@
         }, false)
 
     }, false)
+
+    if (performance.navigation.type == 1) {
+        getEvents();
+        console.log("page was refreshed");
+        //regain token from php
+    }
 
    //login popup
     document.getElementById("login").addEventListener("click", function(){
@@ -192,18 +208,6 @@ function sendNewUser(registration){
             }
         }
     });
-}
-
-//https://stackoverflow.com/questions/30529929/how-do-i-pass-my-access-token-via-javascript-with-identityserver3 
-function getAccessToken() {
-    let returnVal = "";
-
-    let xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://localhost:61207/Home/GetAccessToken", false);
-    xhr.send();
-    returnVal = xhr.responseText;
-
-    return returnVal;
 }
 
 
