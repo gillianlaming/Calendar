@@ -1,6 +1,6 @@
 <?php
     require 'calendar_database.php';
-    $user = 'gillian'; // change this
+    $user = $_POST['user'];
     $myArray = array();
     
     $result = $mysqli->prepare("select event_id, username, event_name, start_date, end_date, location, color from events where username=?");

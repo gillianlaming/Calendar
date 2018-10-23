@@ -15,7 +15,6 @@
         <button id="logout" class="logout">logout</button>
         <h1 id="header">Calendar</h1>
         <p id="label"></p>
-        <div id="buttons"></div>
         <h3 id="month_label"></h3>
         <button id="prev_month_btn">prev month</button>
         <button id="next_month_btn">next month</button>
@@ -193,25 +192,6 @@ function sendNewUser(registration){
         }
     });
 }
-
-document.getElementById("addCategory").addEventListener("click", function(){
-    $('#popUpCategory').html('<br><h3>add a category</h3>');
-        $('#newCategory').val(""); 
-        $('#addme').val('add');
-        $('#addingCategory').dialog();
-        $('#calendar').css('opacity', '.75');
-        $('#addingCategory').on('dialogclose', function(event) {
-            $('#calendar').css('opacity', '1');
-         });
-    document.getElementById("addme").addEventListener("click", function(){
-        let text =  $('#newCategory').val;
-        //$('#buttons').html("<label><input type=checkbox name=checkbox value=value>"+text+"</label>");
-        $('#addingCategory').dialog("close");
-            $('#calendar').css('opacity', '1');
-        existsCategory = "true";
-    }, false)
-}, false)
-
 
 //https://stackoverflow.com/questions/30529929/how-do-i-pass-my-access-token-via-javascript-with-identityserver3 
 function getAccessToken() {

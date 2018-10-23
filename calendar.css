@@ -141,15 +141,3 @@ p{
     color: #ae184f;
     opacity: .7;
 }
-
-#buttons{
-    border-style: solid;
-    border-width: thin;
-    border-color: #ae184f;
-    width: 100px;
-    height: 100px;
-    position: absolute;
-    top:8px;
-    left: 10px;
-    text-align: left;
-}

@@ -22,55 +22,38 @@ function updateCalendar(){
     if (username != ''){
         loggedIn();
     }
-    displayEvents();
 }
 
-function displayEvents(){ // display events from SQL
-    let xmlHttp = new XMLHttpRequest();
-    //xmlHttp.open("GET", "http://ec2-18-223-135-67.us-east-2.compute.amazonaws.com/getEvents.php", true); //leela's
-    xmlHttp.open("GET", "http://ec2-18-207-202-216.compute-1.amazonaws.com/~gdlaming/getEvents.php", true); //gillians
-
+function displayUserEvents(response){
     $('.event').remove();
+    let parsed = JSON.parse(response);
+    for (let i =0; i<parsed.length; i++){
+        let date = parsed[i].start_date.split(" ")[0];
+        let time = parsed[i].start_date.split(" ")[1];
+        let loc = parsed[i].location;
+        let color = parsed[i].color;
+        let event_id = parsed[i].event_id;
+        let author = parsed[i].username;
+        let day = date.substring(8);
+        
+        if (day[0] == 0){
+            day = day.substring(1);
+            date = date.substring(0,7)+"-"+day;
+        }
 
-    // on load
-    xmlHttp.addEventListener('load', function(e){
-       if (xmlHttp.status == 200){
-            let response = xmlHttp.responseText; // get json
-            let parsed = JSON.parse(response); // parse json
-            for (let i =0; i<parsed.length; i++){
-                let date = parsed[i].start_date.split(" ")[0];
-                let time = parsed[i].start_date.split(" ")[1];
-                let loc = parsed[i].location;
-                let color = parsed[i].color;
-                let event_id = parsed[i].event_id;
-                let author = parsed[i].username;
-                let day = date.substring(8);
-                
-                if (day[0] == 0){
-                    day = day.substring(1);
-                    date = date.substring(0,7)+"-"+day;
-                }
+        if (time[0] == 0)
+            time = time.substring(1);
 
-                if (time[0] == 0)
-                    time = time.substring(1);
+        let code = " "; if(color == "coquelicot"){ code = '#EF626C'} if(color == "glaucous"){code = '#6B4EAA'}
+        if(color == "wenge"){ code = '#1b1e88' } if(color == "amaranth"){ code = '#F291BE' }if(color == "black"){code = '#000000'}
 
-                let code = " "; if(color == "coquelicot"){ code = '#EF626C'} if(color == "glaucous"){code = '#6B4EAA'}
-                if(color == "wenge"){ code = '#1A1B41' } if(color == "amaranth"){ code = '#F291BE' }if(color == "black"){code = '#000000'}
+        let event_string = "<div class='event' onclick='editEvent(this)'><h6 class='time' id='"+time+"'>"+time+"</h6><p class='event_name' id='"+parsed[i].event_name+"'>"+parsed[i].event_name+"<i id='"+loc+"'> at "+loc+"</i><i class='event_id' id='"+event_id+"'></i><i id='"+author+"'></i><i id='"+color+"'></i></p></div>";
+        $('#'+date).append(event_string);
 
-                let event_string = "<div class='event' onclick='editEvent(this)'><h6 class='time' id='"+time+"'>"+time+"</h6><p class='event_name' id='"+parsed[i].event_name+"'>"+parsed[i].event_name+"<i id='"+loc+"'> at "+loc+"</i><i class='event_id' id='"+event_id+"'></i><i id='"+author+"'></i><i id='"+color+"'></i></p></div>";
-                $('#'+date).append(event_string);
-
-                $('#'+date+" h6").first().css({"margin-bottom": "-40px"});
-                $('#'+date+" img").first().css({"margin-bottom": "-20px","top": "0px"});
-                $('#'+date+" p").css({"color": code});
-            }
-       }
-       else {
-           $('#calendar').html("<p>Something went wrong. Try again!</p>");
-       }
-    }, false);
-
-    xmlHttp.send(null);
+        $('#'+date+" h6").first().css({"margin-bottom": "-40px"});
+        $('#'+date+" img").first().css({"margin-bottom": "-20px","top": "0px"});
+        $('#'+date+" p").css({"color": code});
+    }
 }
 
 function loggedIn(){
@@ -86,7 +69,23 @@ function loggedIn(){
     }
 
     $('#label').html("click the plus sign to add an event on that day, or click your event to edit it");
+
+   getEvents();
+
 }
+
+function getEvents(){
+     $.ajax({
+        type: 'POST',
+        url: 'getEvents.php',
+        data: { user: username },
+        success: function(response) {
+            console.log(response);
+            displayUserEvents(response);
+        }
+    });
+}
+
 
 function getMonthName(){
     let monthNum = currentMonth.month;
@@ -102,6 +101,7 @@ function addEvent(day) {  // this function makes the dialog box pop up, and adds
     $('#end_date').val(this_date +" 0:00:00");
     $('#edit_event').attr('id', 'new_event');
     $('#location').val("");
+    $('#color').css('display', '');
     $('#event_name').val("");
     $('#submit').val('Add Event');
     $('#popUp').dialog();
@@ -130,7 +130,7 @@ function sendNewEvent(form_contents){ // this sends the form contents to php whi
         data: { event_name: form_contents[0], start_date: form_contents[1], end_date: form_contents[2], location: form_contents[3], color: form_contents[4], username: form_contents[5]},
         success: function(response) {
             $('#submit').replaceWith($('#submit').clone());
-            displayEvents();
+            getEvents();
         }
     });
     
@@ -181,7 +181,7 @@ function editThisEvent(form_contents) {
         data: { event_name: form_contents[0], start_date: form_contents[1], end_date: form_contents[2], location: form_contents[3], event_id: form_contents[4] },
         success: function(response) {
             $('#submit').replaceWith($('#submit').clone());
-            displayEvents();
+            getEvents();
         }
     });
     
@@ -196,7 +196,7 @@ function deleteMe(info){
         success: function(response) {
             if (response == "true"){
                 $('#delete_event').replaceWith($('#delete_event').clone());
-                displayEvents();
+                getEvents();
             }
         }
     });
