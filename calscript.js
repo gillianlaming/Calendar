@@ -53,33 +53,16 @@ function displayEvents(){ // display events from SQL
 
                 if (time[0] == 0)
                     time = time.substring(1);
-                let code = " "
-                if(color == "coquelicot"){
-                    code = FF0000
-                }
-                if(color == "glaucous"){
-                    code = 474056
 
-                }
-                if(color == "wenge"){
-                    code = C4B1AE
-                }
-                if(color == "amaranth"){
-                    code = FF99C9 
-                }
-                if(color == "black"){
-                    code = 000000 
-                }
+                let code = " "; if(color == "coquelicot"){ code = '#EF626C'} if(color == "glaucous"){code = '#6B4EAA'}
+                if(color == "wenge"){ code = '#1A1B41' } if(color == "amaranth"){ code = '#F291BE' }if(color == "black"){code = '#000000'}
 
-                
-
-                let event_string = "<div class='event' onclick='editEvent(this)'><h6 class='time' id='"+time+"'>"+time+"</h6><p class='event_name' id='"+parsed[i].event_name+"'>"+parsed[i].event_name+"<i id='"+loc+"'> at "+loc+"</i><i class='event_id' id='"+event_id+"'></i><i id='"+author+"'></i></p></div>";
+                let event_string = "<div class='event' onclick='editEvent(this)'><h6 class='time' id='"+time+"'>"+time+"</h6><p class='event_name' id='"+parsed[i].event_name+"'>"+parsed[i].event_name+"<i id='"+loc+"'> at "+loc+"</i><i class='event_id' id='"+event_id+"'></i><i id='"+author+"'></i><i id='"+color+"'></i></p></div>";
                 $('#'+date).append(event_string);
 
                 $('#'+date+" h6").first().css({"margin-bottom": "-40px"});
                 $('#'+date+" img").first().css({"margin-bottom": "-20px","top": "0px"});
-                $('#'+date).css({"color":'#'+code});
-                
+                $('#'+date+" p").css({"color": code});
             }
        }
        else {
@@ -120,36 +103,32 @@ function addEvent(day) {  // this function makes the dialog box pop up, and adds
     $('#edit_event').attr('id', 'new_event');
     $('#location').val("");
     $('#event_name').val("");
-    $('#color').val("");
     $('#submit').val('Add Event');
     $('#popUp').dialog();
     $('#calendar').css('opacity', '.75');
 
-document.getElementById('submit').addEventListener("click", function(){
-    if (username != ''){
-        let form_contents = [$('#event_name').val(), $('#start_date').val(), $('#end_date').val(), $('#location').val(),$('#color').val(), username];
-        sendNewEvent(form_contents);
-    } else {
-        alert("you are not logged in");
-    }
-}, false);
+    document.getElementById('submit').addEventListener("click", function(){
+        if (username != ''){
+            console.log($('select').val());
+            let form_contents = [$('#event_name').val(), $('#start_date').val(), $('#end_date').val(), $('#location').val(), $('select').val(), username];
+            sendNewEvent(form_contents);
+        } else {
+            alert("you are not logged in");
+        }
+    }, false);
 
-$('#popUp').on('dialogclose', function(event) {
-    $('#calendar').css('opacity', '1');
-});
+    $('#popUp').on('dialogclose', function(event) {
+        $('#calendar').css('opacity', '1');
+    });
 }
 
 function sendNewEvent(form_contents){ // this sends the form contents to php which sends to SQL
     $('#popUp').dialog('close');
-
     $.ajax({
         type: 'POST',
         url: 'newEvent.php',
         data: { event_name: form_contents[0], start_date: form_contents[1], end_date: form_contents[2], location: form_contents[3], color: form_contents[4], username: form_contents[5]},
         success: function(response) {
-            if(!response){
-                console.log("uploading error")
-            }
             $('#submit').replaceWith($('#submit').clone());
             displayEvents();
         }
@@ -162,7 +141,6 @@ function editEvent(event){ // pulls up dialog box for editing event
     let this_name = event.childNodes[1].id;
     let this_date = event.parentNode.id;
     let this_loc = event.childNodes[1].childNodes[1].id;
-    let this_color = event.childNodes[1]
     let this_event_id = event.childNodes[1].childNodes[2].id;
     let this_author = event.childNodes[1].childNodes[3].id;
 
@@ -173,7 +151,7 @@ function editEvent(event){ // pulls up dialog box for editing event
         $('#start_date').val(this_date+" "+this_time);
         $('#end_date').val(this_date +" 23:00:00");
         $('#location').val(this_loc);
-        $('#color').val(this_color);
+        $('#color').css('display', 'none');
         $('#submit').val('Save Event');
         $('#popUp').dialog();
         $('#calendar').css('opacity', '.75');
@@ -181,7 +159,7 @@ function editEvent(event){ // pulls up dialog box for editing event
             $('#calendar').css('opacity', '1');
         });
         document.getElementById('submit').addEventListener("click", function(){
-            let form_contents = [$('#event_name').val(), $('#start_date').val(), $('#end_date').val(), $('#location').val(), $('#color').val(), this_event_id];
+            let form_contents = [$('#event_name').val(), $('#start_date').val(), $('#end_date').val(), $('#location').val(), this_event_id];
             editThisEvent(form_contents);
         }, false);
         document.getElementById("delete_event").addEventListener("click", function(){
@@ -197,11 +175,10 @@ function editEvent(event){ // pulls up dialog box for editing event
 
 function editThisEvent(form_contents) {
     $('#popUp').dialog('close');
-
     $.ajax({
         type: 'POST',
         url: 'editEvent.php',
-        data: { event_name: form_contents[0], start_date: form_contents[1], end_date: form_contents[2], location: form_contents[3], color: form_contents[4], event_id: form_contents[5] },
+        data: { event_name: form_contents[0], start_date: form_contents[1], end_date: form_contents[2], location: form_contents[3], event_id: form_contents[4] },
         success: function(response) {
             $('#submit').replaceWith($('#submit').clone());
             displayEvents();

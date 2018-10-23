@@ -10,7 +10,6 @@
         <script type="text/javascript" src="calendar.min.js"></script>
     </head>
     <body>
-        
         <button id="login" class="login">login</button>
         <button id="register" class = "register">register</button>
         <button id="logout" class="logout">logout</button>
@@ -28,12 +27,12 @@
                 <input type="text" name="start_date" id="start_date" placeholder="start date and time" required><br> 
                 <input type="text" name="end_date" id="end_date"placeholder="end date and time" required><br> 
                 <input type="text" name="location" id="location" placeholder="location" required><br>
-                <select name="colors" required>
+                <select name="color" id="color" required>
+                    <option value="black">black</option>
                     <option value="coquelicot">coquelicot</option>
                     <option value="glaucous">glaucous</option>
                     <option value="wenge">wenge</option>
                     <option value="amaranth">amaranth</option>
-                    <option value="black">black</option>
                 </select>
                 <input type="submit" name="submit" id = "submit" value="Add Event"><br><br>
             </div>
@@ -61,19 +60,6 @@
                 <input type="submit" name="cancel" id="cancel" value="cancel" required><br><br>
         </div>
 
-        <div id="categories">
-            <input type="submit" name="addCategory" id="addCategory" value="addCategory" style=
-            "position:absolute;
-            top:8px;
-            left: 10px;"><br> 
-        </div>
-
-        <div id="addingCategory">
-            <div id="popUpCategory"></div>
-            <input type="text" name="newCategory" id="newCategory" value="newCategory" required><br>
-            <input type="submit" name="addme" id="addme" required><br><br>
-        </div>
-       
         <table id="calendar">
             <tr>
                 <td>Sunday</td><td>Monday</td><td>Tuesday</td><td>Wednesday</td><td>Thursday</td><td>Friday</td><td>Saturday</td>
@@ -89,8 +75,7 @@
 
 <script>
     let username = "";
-    let existsCategory = "false";
-
+    
     let currentMonth = new Month(2018, 9); // current month is October 2018
     document.getElementById("month_label").innerHTML = getMonthName()+" "+currentMonth.year;
     window.addEventListener('load', updateCalendar, false); // show the calendar on load
@@ -129,11 +114,7 @@
          
         }, false)
 
-        
-
-        }, false)
-
-   
+    }, false)
 
    //login popup
     document.getElementById("login").addEventListener("click", function(){
@@ -153,7 +134,7 @@
             $('#calendar').css('opacity', '1');
          });
 
-        }, false);
+    }, false);
 
     function checkingUser(loginInfo){
         $('#popUpLogin').closest('.ui-dialog-content').dialog('close');
@@ -173,29 +154,27 @@
         });    
     }
 
-    
     //registration pop up
    document.getElementById("register").addEventListener("click", register, false);
 
-function register(){
-    
-    $('#popUpRegister').html('<br><h3>register</h3>');
-    $('#username').val("");
-    $('#password').val(""); 
-    $('#register').val('');
-    $('#registering').dialog();
-    $('#calendar').css('opacity', '.75');
-    
-    document.getElementById('registerme').addEventListener("click", function(){ 
+    function register(){
         
-        let registration = [$('#username').val(), $('#password').val()];
-        sendNewUser(registration);
+        $('#popUpRegister').html('<br><h3>register</h3>');
+        $('#username').val("");
+        $('#password').val(""); 
+        $('#register').val('');
+        $('#registering').dialog();
+        $('#calendar').css('opacity', '.75');
+        
+        document.getElementById('registerme').addEventListener("click", function(){ 
+            let registration = [$('#username').val(), $('#password').val()];
+            sendNewUser(registration);
         },false)
 
-    $('#registering').on('dialogclose', function(event) {
-        $('#calendar').css('opacity', '1');
-    });
-}
+        $('#registering').on('dialogclose', function(event) {
+            $('#calendar').css('opacity', '1');
+        });
+    }
 
 function sendNewUser(registration){
     $('#popUpRegister').closest('.ui-dialog-content').dialog('close');

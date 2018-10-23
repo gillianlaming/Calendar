@@ -7,7 +7,7 @@
     $color = $_POST['color'];
     $username = $_POST['username'];
     // $_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(32));
-
+    
     $add_event = $mysqli->prepare("insert into events (username, event_name, start_date, end_date, location, color) values (?, ?, ?, ?, ?, ?)");
     $result = "true";
     if(!$add_event){
@@ -17,7 +17,7 @@
     }
     echo($response);
 
-    $add_event->bind_param('sssss', $username, $event_name, $start_date, $end_date, $loc, $color);
+    $add_event->bind_param('ssssss', $username, $event_name, $start_date, $end_date, $loc, $color);
     $add_event->execute();
     $add_event->close();
     $mysqli->close();
