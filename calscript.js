@@ -75,9 +75,7 @@ function loggedIn(){ // if login is successful, the calendar becomes editable
 
 function getEvents(){ // ajax call to getEvents.php which gets this user's events from sql
      $.ajax({
-        type: 'POST',
         url: 'getEvents.php',
-        data: { user: username },
         success: function(response) {
             displayUserEvents(response);
         }

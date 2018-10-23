@@ -40,6 +40,8 @@
             $get_hash->close();
 
             if (password_verify($password, $hash)){
+                session_start();
+                $_SESSION['name'] = $username;
                 echo ("true");
             }
             else{
