@@ -108,12 +108,7 @@
             $.ajax({
                 url: 'logout.php', 
                 success: function(response) {
-                    console.log(response)
-                    if (response === "true"){
-                        console.log("logout successful")
-                    } else{
-                        alert("logout failed");
-                    }
+                    console.log("success")
             }
         });
         }, false);
