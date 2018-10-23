@@ -22,24 +22,24 @@ creative portion:
 
 TO DOs:
 
-1. "without ever refreshing the browser after the initial web page load" does this mean logout is super fucked? (no, i dont think so because wording later on is "At no time should the main page need to be reloaded")
 
-2. "Unregistered users should see no events on the calendar." NO (SAD!!)
+2. "Unregistered users should see no events on the calendar." in process
 
-4. Your AJAX should not ask the server for events from a certain username. Instead, your AJAX should ask the server for events, and the server should respond with the events for only the currently-logged-in user (from the session). Can you think of why? ARE WE DOING THIS
+4. Your AJAX should not ask the server for events from a certain username. Instead, your AJAX should ask the server for events, and the server should respond with the events for only the currently-logged-in user (from the session). Can you think of why? 
+    - leela is working on this now
 
-5. we need to run everything by a validator - in process
+5. we need to run everything by a validator - in process 
+    - gillian is asking question on piazza about this
 
 7. we need to pass tokens to prevent CSRF attacks ("Hint: You will need to send your CSRF tokens in your AJAX requests. Remember that AJAX still submits forms and runs server-side scripts, just like the vanilla forms you've been using in Modules 2 and 3.")
 - CSRF tokens are passed when editing or removing events (3 points)
+- gillian is going to do this
 
 8. we need to make sure that the link we put in the readme corresponds with the link to the instance in the code (!!!)
 
-9. are we safe? "Safe from XSS attacks; that is, all content is escaped on output (3 points)"
+9. are we safe? "Safe from XSS attacks; that is, all content is escaped on output (3 points)" -???
 
-10. im 99% sure we use queries "Use prepared queries to prevent SQL Injection attacks."
-
-11. the fuck? "Session cookie is HTTP-Only (3 points)"
+11. the fuck? "Session cookie is HTTP-Only (3 points)" --pretty sure this is okay 
 
 Validator:
 
