@@ -10,15 +10,18 @@
         <script type="text/javascript" src="calendar.min.js"></script>
     </head>
     <body>
+        <button id="colorMode">view events by color</button>
+        <button id="back">back to month view</button>
         <button id="login" class="login">login</button>
         <button id="register" class = "register">register</button>
         <button id="logout" class="logout">logout</button>
         <h1 id="header">Calendar</h1>
-        <p id="label"></p>
-        <h3 id="month_label"></h3>
-        <button id="prev_month_btn">prev month</button>
-        <button id="next_month_btn">next month</button>
-
+        <div id="calStuff">
+            <p id="label"></p>
+            <h3 id="month_label"></h3>
+            <button id="prev_month_btn">prev month</button>
+            <button id="next_month_btn">next month</button>
+        </div>
         <div id="popUp">
             <div id="popUpHeader"></div>
             <div id="new_event">
@@ -69,6 +72,15 @@
             <tr id="week4" class="week"></tr>
             <tr id="week5" class="week"></tr>
         </table>
+        <br><br>
+        <div id="bottom">
+            <p id="colorLabel">events organized by color!</p>
+            <div class="colorblock" id="blackBlock"><h4>black events</h4><hr></div>
+            <div class="colorblock" id="coquelicotBlock"><h4>coquelicot events</h4><hr></div>
+            <div class="colorblock" id="glaucousBlock"><h4>glaucous events</h4><hr></div>
+            <div class="colorblock" id="wengeBlock"><h4>wenge events</h4><hr></div>
+            <div class="colorblock" id="amaranthBlock"><h4>amaranth events</h4><hr></div>
+        </div>
     </body>
 
  <script>   
@@ -191,6 +203,20 @@
             }
         });
     }
+
+    document.getElementById("colorMode").addEventListener("click", function(){
+        $('#bottom').css('display', 'inline-block');
+        $('#calendar').css('display', 'none'); $('#calStuff').css('display', 'none');
+        $('#colorMode').css('display', 'none');
+        $('#back').css('display', 'inline-block');
+    }, false);
+
+    document.getElementById("back").addEventListener("click", function(){
+        $('#bottom').css('display', 'none');
+        $('#calendar').css('display', 'block'); $('#calStuff').css('display', 'block');
+        $('#colorMode').css('display', 'block');
+        $('#back').css('display', 'none');
+    }, false);
 
     //https://stackoverflow.com/questions/30529929/how-do-i-pass-my-access-token-via-javascript-with-identityserver3 
     function getAccessToken() {

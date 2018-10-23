@@ -78,6 +78,7 @@ function getEvents(){ // ajax call to getEvents.php which gets this user's event
         url: 'getEvents.php',
         success: function(response) {
             displayUserEvents(response);
+            colorBlocks(response);
         }
     });
 }
@@ -192,4 +193,33 @@ function deleteMe(info){ // sends info of what event to delete
             }
         }
     });
+}
+
+function colorBlocks(response){
+    $('.colorListItem').remove();
+    $('.line').remove();
+    let parsed = JSON.parse(response);
+    for (let i =0; i<parsed.length; i++){
+        let date = parsed[i].start_date.split(" ")[0];
+        let time = parsed[i].start_date.split(" ")[1];
+        let loc = parsed[i].location;
+        let color = parsed[i].color;
+        let day = date.substring(8);
+        
+        if (day[0] == 0){
+            day = day.substring(1);
+            date = date.substring(0,7)+"-"+day;
+        }
+
+        if (time[0] == 0)
+            time = time.substring(1);
+
+        let code = " "; if(color == "coquelicot"){ code = '#EF626C'} if(color == "glaucous"){code = '#6B4EAA'}
+        if(color == "wenge"){ code = '#1b1e88' } if(color == "amaranth"){ code = '#F291BE' }if(color == "black"){code = '#000000'}
+
+        let event_string = "<li class='colorListItem'><h6 class='time'>"+date+" at "+time+"</h6><p class='event_name'>"+parsed[i].event_name+"<i id='"+loc+"'> at "+loc+"</i></p></li><hr class='line'>";
+
+        $('#'+color+"Block").append(event_string);
+        $('#'+color+"Block").css({"background-color": code, "color": "#fff"});
+    }
 }

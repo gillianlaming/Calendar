@@ -43,44 +43,12 @@ p{
     margin-bottom: -10px;
 }
 
-#popUp{
+#popUp, #registering, #loggingin, #loggingout{
     display: none;
     width: 100%;
     background-color: #555;
     color: #fff;
-    border-radius: 15px;
-}
-
-#registering{
-    display: none;
-    width: 100%;
-    background-color: #555;
-    color: #fff;
-    border-radius: 15px;
-}
-
-#loggingin{
-    display: none;
-    width: 100%;
-    background-color: #555;
-    color: #fff;
-    border-radius: 15px;
-}
-
-#loggingout{
-    display: none;
-    width: 100%;
-    background-color: #555;
-    color: #fff;
-    border-radius: 15px;
-}
-
-#addingCategory{
-    display: none;
-    width: 100%;
-    background-color: #555;
-    color: #fff;
-    border-radius: 15px;
+    border-radius: 10px;
 }
 
 #popUp h3{
@@ -111,14 +79,8 @@ p{
 
 .event_name:hover{
     cursor: pointer;
-    color: #ae184f;
 }
 
-.addCategory{
-    position:absolute;
-    top:8px;
-    left: 10px;
-}
 .login, .logout{ 
     position:absolute;
     top:10px;
@@ -131,13 +93,64 @@ p{
      right: 10px;
  }
 
-.logout{
-    display: none;
+
+#colorMode, #back{
+    position:absolute;
+    top:10px;
+    left: 10px;
 }
 
+.logout, #back{
+    display: none;
+}
 
 #label{
     margin-top: -20px;
     color: #ae184f;
     opacity: .7;
+}
+
+#bottom{
+    display: none;
+}
+
+#bottom h2{
+    color: #fff;
+}
+
+.colorblock{
+    width: 15%;
+    margin: 10px;
+    display: inline-block;
+    padding-bottom: 10px;
+    border-radius: 10px;
+}
+
+.colorListItem{
+    color: #fff !important;
+    text-decoration: none;
+    list-style: none;
+}
+
+.colorListItem .event_name{
+    color: #fff;
+}
+
+.colorListItem .event_name:hover{
+    cursor: initial;
+}
+
+.colorblock hr {
+    color: transparent;
+	border-width: .75px;
+	border-color: #fff;
+	margin: 10px 0;
+}
+
+.colorblock h4{
+    margin-bottom: -5px;
+}
+
+#colorLabel {
+    margin-top: -40px;
 }
