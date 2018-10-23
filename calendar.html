@@ -28,6 +28,13 @@
                 <input type="text" name="start_date" id="start_date" placeholder="start date and time" required><br> 
                 <input type="text" name="end_date" id="end_date"placeholder="end date and time" required><br> 
                 <input type="text" name="location" id="location" placeholder="location" required><br>
+                <select name="colors" required>
+                    <option value="coquelicot">coquelicot</option>
+                    <option value="glaucous">glaucous</option>
+                    <option value="wenge">wenge</option>
+                    <option value="amaranth">amaranth</option>
+                    <option value="black">black</option>
+                </select>
                 <input type="submit" name="submit" id = "submit" value="Add Event"><br><br>
             </div>
         </div>
@@ -238,4 +245,6 @@ function getAccessToken() {
 
     return returnVal;
 }
+
+
 </script>

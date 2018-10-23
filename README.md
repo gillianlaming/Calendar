@@ -10,16 +10,11 @@ CALENDAR TO-DO LIST:
 3. logout probably shouldnt just be refreshing but idk -- CHANGED. IT LOOKS BETTER NOW.
 
 4. creative portion
-    - uhhh
-    - category thing -- IN PROGRESS
-    - make it prettier? -- I DONT THINK THIS WOULD COUNT FOR CREATIVE PORTION POINTS
-    - google maps seems hard lol -- YES, LETS NIX THIS
     - when username exists, give user suggestions of usernames similar to current username that doesnt exist
     - color code events based on which user's event it is
         - "choose color" option in register form, we could add this to the mySQL table
     - month view, week view, day view (I don't know how hard this would be because you did the view part)
-
-5. Do we need to take out all 'vars'? --REMOVED ALL, NOTHING SEEMS TO BE ERRORING
+    - repeating events
 
 6. Gillian started working on tokens, unclear where she left off. Do we need to send these tokens?
 
