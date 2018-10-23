@@ -44,7 +44,7 @@ CREATIVE PORTION DESCRIPTION:
 
 *   honestlyt still trying to figure out how in vscode this list ^^^ is out of order but then on bitbucket??? shes beautiful??? 
  -  america exBLAIN
-
+- fuck we need to fix logout
 Validator:
 
 - newUser.php PASS
