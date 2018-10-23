@@ -32,7 +32,7 @@
                     <option value="glaucous">glaucous</option>
                     <option value="wenge">wenge</option>
                     <option value="amaranth">amaranth</option>
-                </select>
+                </select><br>
                 <input type="submit" name="submit" id = "submit" value="Add Event"><br><br>
             </div>
         </div>
@@ -70,12 +70,11 @@
             <tr id="week5" class="week"></tr>
         </table>
     </body>
-</html>
 
-<script>
+ <script>   
     let username = "";
-    
     let currentMonth = new Month(2018, 9); // current month is October 2018
+
     document.getElementById("month_label").innerHTML = getMonthName()+" "+currentMonth.year;
     window.addEventListener('load', updateCalendar, false); // show the calendar on load
     // Change the month when the "next" button is pressed
@@ -175,35 +174,35 @@
         });
     }
 
-function sendNewUser(registration){
-    $('#popUpRegister').closest('.ui-dialog-content').dialog('close');
-    $.ajax({
-        type: 'POST',
-        url: 'newUser.php', 
-        data: { username: registration[0], password: registration[1] },
-        success: function(response) {
-            if(response){
-                alert("successful registration, click login to login");
+    function sendNewUser(registration){
+        $('#popUpRegister').closest('.ui-dialog-content').dialog('close');
+        $.ajax({
+            type: 'POST',
+            url: 'newUser.php', 
+            data: { username: registration[0], password: registration[1] },
+            success: function(response) {
+                if(response){
+                    alert("successful registration, click login to login");
+                }
+                else{
+                    alert ("username exists, please choose another");
+                    register();
+                }
             }
-            else{
-                alert ("username exists, please choose another");
-                register();
-            }
-        }
-    });
-}
+        });
+    }
 
-//https://stackoverflow.com/questions/30529929/how-do-i-pass-my-access-token-via-javascript-with-identityserver3 
-function getAccessToken() {
-    let returnVal = "";
+    //https://stackoverflow.com/questions/30529929/how-do-i-pass-my-access-token-via-javascript-with-identityserver3 
+    function getAccessToken() {
+        let returnVal = "";
 
-    let xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://localhost:61207/Home/GetAccessToken", false);
-    xhr.send();
-    returnVal = xhr.responseText;
+        let xhr = new XMLHttpRequest();
+        xhr.open("GET", "http://localhost:61207/Home/GetAccessToken", false);
+        xhr.send();
+        returnVal = xhr.responseText;
 
-    return returnVal;
-}
-
-
+        return returnVal;
+    }
 </script>
+
+</html>

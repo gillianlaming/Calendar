@@ -1,4 +1,4 @@
-function updateCalendar(){
+function updateCalendar(){ // builds html table
     $('.week').empty();
 	let weeks = currentMonth.getWeeks();
     let i = 1;
@@ -24,7 +24,7 @@ function updateCalendar(){
     }
 }
 
-function displayUserEvents(response){
+function displayUserEvents(response){ // takes json response and displays events in calendar html
     $('.event').remove();
     let parsed = JSON.parse(response);
     for (let i =0; i<parsed.length; i++){
@@ -56,7 +56,7 @@ function displayUserEvents(response){
     }
 }
 
-function loggedIn(){
+function loggedIn(){ // if login is successful, the calendar becomes editable
     $('#header').html(username+"'s Calendar");
     $('#register').css('display', 'none');
     $('#login').css('display', 'none');
@@ -71,23 +71,20 @@ function loggedIn(){
     $('#label').html("click the plus sign to add an event on that day, or click your event to edit it");
 
    getEvents();
-
 }
 
-function getEvents(){
+function getEvents(){ // ajax call to getEvents.php which gets this user's events from sql
      $.ajax({
         type: 'POST',
         url: 'getEvents.php',
         data: { user: username },
         success: function(response) {
-            console.log(response);
             displayUserEvents(response);
         }
     });
 }
 
-
-function getMonthName(){
+function getMonthName(){ // month int to string
     let monthNum = currentMonth.month;
     if (monthNum == 0){ return 'January';} if (monthNum == 1){ return 'February';}if (monthNum == 2){ return 'March';}if (monthNum == 3){ return 'April';}
     if (monthNum == 4){ return 'May';}if (monthNum == 5){ return 'June';}if (monthNum == 6){ return 'July';}if (monthNum == 7){ return 'August';}
@@ -109,7 +106,6 @@ function addEvent(day) {  // this function makes the dialog box pop up, and adds
 
     document.getElementById('submit').addEventListener("click", function(){
         if (username != ''){
-            console.log($('select').val());
             let form_contents = [$('#event_name').val(), $('#start_date').val(), $('#end_date').val(), $('#location').val(), $('select').val(), username];
             sendNewEvent(form_contents);
         } else {
@@ -129,14 +125,13 @@ function sendNewEvent(form_contents){ // this sends the form contents to php whi
         url: 'newEvent.php',
         data: { event_name: form_contents[0], start_date: form_contents[1], end_date: form_contents[2], location: form_contents[3], color: form_contents[4], username: form_contents[5]},
         success: function(response) {
-            $('#submit').replaceWith($('#submit').clone());
+            $('#submit').replaceWith($('#submit').clone()); // removes event listeners
             getEvents();
         }
     });
-    
 }
 
-function editEvent(event){ // pulls up dialog box for editing event
+function editEvent(event){ // pulls up dialog box for editing or deleting event, already propogated
     let this_time = event.childNodes[0].id;
     let this_name = event.childNodes[1].id;
     let this_date = event.parentNode.id;
@@ -151,7 +146,7 @@ function editEvent(event){ // pulls up dialog box for editing event
         $('#start_date').val(this_date+" "+this_time);
         $('#end_date').val(this_date +" 23:00:00");
         $('#location').val(this_loc);
-        $('#color').css('display', 'none');
+        $('#color').css('display', 'none'); // color is not editable
         $('#submit').val('Save Event');
         $('#popUp').dialog();
         $('#calendar').css('opacity', '.75');
@@ -173,7 +168,7 @@ function editEvent(event){ // pulls up dialog box for editing event
     }
 }
 
-function editThisEvent(form_contents) {
+function editThisEvent(form_contents) { // sends form contents to php which sends to SQL to edit event
     $('#popUp').dialog('close');
     $.ajax({
         type: 'POST',
@@ -184,10 +179,9 @@ function editThisEvent(form_contents) {
             getEvents();
         }
     });
-    
 }
 
-function deleteMe(info){
+function deleteMe(info){ // sends info of what event to delete
     $('#popUp').dialog('close');
     $.ajax({
         type: 'POST',
