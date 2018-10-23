@@ -1,7 +1,7 @@
 <?php
     require 'calendar_database.php';
     session_start();
-    if(isset($_SESSION['name'])){
+    if(isset($_SESSION['name']) && isset($_SESSION['token'])){
         $user = $_SESSION['name'];
         $myArray = array();
         

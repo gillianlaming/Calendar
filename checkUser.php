@@ -42,6 +42,7 @@
             if (password_verify($password, $hash)){
                 session_start();
                 $_SESSION['name'] = $username;
+                $_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(32));
                 echo ("true");
             }
             else{

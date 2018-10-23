@@ -41,6 +41,7 @@ CREATIVE PORTION DESCRIPTION:
 
 11. the fuck? "Session cookie is HTTP-Only (3 points)" --pretty sure this is okay 
 
+
 *   honestlyt still trying to figure out how in vscode this list ^^^ is out of order but then on bitbucket??? shes beautiful??? 
  -  america exBLAIN
 

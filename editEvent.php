@@ -2,7 +2,7 @@
     require 'calendar_database.php';
     session_start();
 		
-	if(isset($_SESSION['name'])){ 
+	if(isset($_SESSION['name'])&&isset($_SESSION['token'])){ 
         $event_name = $_POST['event_name'];
         $start_date = $_POST['start_date'];
         $end_date = $_POST['end_date'];

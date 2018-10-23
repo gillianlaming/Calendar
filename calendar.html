@@ -10,18 +10,16 @@
         <script type="text/javascript" src="calendar.min.js"></script>
     </head>
     <body>
-        <button id="colorMode">view events by color</button>
-        <button id="back">back to month view</button>
         <button id="login" class="login">login</button>
         <button id="register" class = "register">register</button>
         <button id="logout" class="logout">logout</button>
         <h1 id="header">Calendar</h1>
-        <div id="calStuff">
-            <p id="label"></p>
-            <h3 id="month_label"></h3>
-            <button id="prev_month_btn">prev month</button>
-            <button id="next_month_btn">next month</button>
-        </div>
+        <p id="label"></p>
+        <div id="buttons"></div>
+        <h3 id="month_label"></h3>
+        <button id="prev_month_btn">prev month</button>
+        <button id="next_month_btn">next month</button>
+
         <div id="popUp">
             <div id="popUpHeader"></div>
             <div id="new_event">
@@ -35,7 +33,7 @@
                     <option value="glaucous">glaucous</option>
                     <option value="wenge">wenge</option>
                     <option value="amaranth">amaranth</option>
-                </select><br>
+                </select>
                 <input type="submit" name="submit" id = "submit" value="Add Event"><br><br>
             </div>
         </div>
@@ -72,21 +70,13 @@
             <tr id="week4" class="week"></tr>
             <tr id="week5" class="week"></tr>
         </table>
-        <br><br>
-        <div id="bottom">
-            <p id="colorLabel">events organized by color!</p>
-            <div class="colorblock" id="blackBlock"><h4>black events</h4><hr></div>
-            <div class="colorblock" id="coquelicotBlock"><h4>coquelicot events</h4><hr></div>
-            <div class="colorblock" id="glaucousBlock"><h4>glaucous events</h4><hr></div>
-            <div class="colorblock" id="wengeBlock"><h4>wenge events</h4><hr></div>
-            <div class="colorblock" id="amaranthBlock"><h4>amaranth events</h4><hr></div>
-        </div>
     </body>
+</html>
 
- <script>   
+<script>
     let username = "";
+    
     let currentMonth = new Month(2018, 9); // current month is October 2018
-
     document.getElementById("month_label").innerHTML = getMonthName()+" "+currentMonth.year;
     window.addEventListener('load', updateCalendar, false); // show the calendar on load
     // Change the month when the "next" button is pressed
@@ -186,49 +176,35 @@
         });
     }
 
-    function sendNewUser(registration){
-        $('#popUpRegister').closest('.ui-dialog-content').dialog('close');
-        $.ajax({
-            type: 'POST',
-            url: 'newUser.php', 
-            data: { username: registration[0], password: registration[1] },
-            success: function(response) {
-                if(response){
-                    alert("successful registration, click login to login");
-                }
-                else{
-                    alert ("username exists, please choose another");
-                    register();
-                }
+function sendNewUser(registration){
+    $('#popUpRegister').closest('.ui-dialog-content').dialog('close');
+    $.ajax({
+        type: 'POST',
+        url: 'newUser.php', 
+        data: { username: registration[0], password: registration[1] },
+        success: function(response) {
+            if(response){
+                alert("successful registration, click login to login");
             }
-        });
-    }
+            else{
+                alert ("username exists, please choose another");
+                register();
+            }
+        }
+    });
+}
 
-    document.getElementById("colorMode").addEventListener("click", function(){
-        $('#bottom').css('display', 'inline-block');
-        $('#calendar').css('display', 'none'); $('#calStuff').css('display', 'none');
-        $('#colorMode').css('display', 'none');
-        $('#back').css('display', 'inline-block');
-    }, false);
+//https://stackoverflow.com/questions/30529929/how-do-i-pass-my-access-token-via-javascript-with-identityserver3 
+function getAccessToken() {
+    let returnVal = "";
 
-    document.getElementById("back").addEventListener("click", function(){
-        $('#bottom').css('display', 'none');
-        $('#calendar').css('display', 'block'); $('#calStuff').css('display', 'block');
-        $('#colorMode').css('display', 'block');
-        $('#back').css('display', 'none');
-    }, false);
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET", "http://localhost:61207/Home/GetAccessToken", false);
+    xhr.send();
+    returnVal = xhr.responseText;
 
-    //https://stackoverflow.com/questions/30529929/how-do-i-pass-my-access-token-via-javascript-with-identityserver3 
-    function getAccessToken() {
-        let returnVal = "";
+    return returnVal;
+}
 
-        let xhr = new XMLHttpRequest();
-        xhr.open("GET", "http://localhost:61207/Home/GetAccessToken", false);
-        xhr.send();
-        returnVal = xhr.responseText;
 
-        return returnVal;
-    }
 </script>
-
-</html>
