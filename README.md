@@ -18,12 +18,28 @@ CALENDAR TO-DO LIST:
 
 6. Gillian started working on tokens, unclear where she left off. Do we need to send these tokens?
 
-CALENDAR ERRORS:
+TO DOs:
 
-1. I fixed the event printing error. it was glitching on events that had been created before you made all your changes.
+1. "without ever refreshing the browser after the initial web page load" does this mean logout is super fucked? (no, i dont think so because wording later on is "At no time should the main page need to be reloaded")
 
-2. sometimes "successful registration" message shows more than once
+2. "Unregistered users should see no events on the calendar." does this happen
 
-3. my console shows an error saying the site is not secure. is that an issue?
+3. You do not need to support recurring events -- this prolly means doing this is hard so lets not add this to our creative portion
 
-4. Gillian sucks at css so is putting style directly into css, change this later
+4. Your AJAX should not ask the server for events from a certain username. Instead, your AJAX should ask the server for events, and the server should respond with the events for only the currently-logged-in user (from the session). Can you think of why? ARE WE DOING THIS
+
+5. we need to run everything by a validator
+
+6. Be careful when transmitting data over JSON that will be reflected in an event title! (Note: JSON data should be sanitized on the client side, not the server side.) -- OUR DATA isn't reflected in URL, right?
+
+7. we need to pass tokens to prevent CSRF attacks ("Hint: You will need to send your CSRF tokens in your AJAX requests. Remember that AJAX still submits forms and runs server-side scripts, just like the vanilla forms you've been using in Modules 2 and 3.")
+- CSRF tokens are passed when editing or removing events (3 points)
+
+8. we need to make sure that the link we put in the readme corresponds with the link to the instance in the code (!!!)
+
+9. are we safe? "Safe from XSS attacks; that is, all content is escaped on output (3 points)"
+
+10. im 99% sure we use queries "Use prepared queries to prevent SQL Injection attacks."
+
+11. the fuck? "Session cookie is HTTP-Only (3 points)"
+
