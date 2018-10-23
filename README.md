@@ -1,36 +1,34 @@
 # README #
 
-CALENDAR TO-DO LIST:
-## ok final thots before i schlep ##
+##starting to write what we will turn in
 
-1. fuck event listeners but we have to use them so let's remove all 'onclick' things --LETS NOT BOTHER, RUBRIC SAYS NOTHING ABOUT THIS
+GROUP MEMBERS:
 
-2. make sure the right alerts come up when logging in/registering incorrectly -- DONE
+Gillian Laming (ID: 457507)
+Leela Ghaemmaghami (ID: 457569)
 
-3. logout probably shouldnt just be refreshing but idk -- CHANGED. IT LOOKS BETTER NOW.
+link to calendar home page: 
 
-4. creative portion
+CREATIVE PORTION DESCRIPTION:
+
+#our thotszsz
+
+creative portion:
     - when username exists, give user suggestions of usernames similar to current username that doesnt exist
     - color code events based on which user's event it is
         - "choose color" option in register form, we could add this to the mySQL table
     - month view, week view, day view (I don't know how hard this would be because you did the view part)
     - repeating events
 
-6. Gillian started working on tokens, unclear where she left off. Do we need to send these tokens?
-
 TO DOs:
 
 1. "without ever refreshing the browser after the initial web page load" does this mean logout is super fucked? (no, i dont think so because wording later on is "At no time should the main page need to be reloaded")
 
-2. "Unregistered users should see no events on the calendar." does this happen
-
-3. You do not need to support recurring events -- this prolly means doing this is hard so lets not add this to our creative portion
+2. "Unregistered users should see no events on the calendar." NO (SAD!!)
 
 4. Your AJAX should not ask the server for events from a certain username. Instead, your AJAX should ask the server for events, and the server should respond with the events for only the currently-logged-in user (from the session). Can you think of why? ARE WE DOING THIS
 
-5. we need to run everything by a validator
-
-6. Be careful when transmitting data over JSON that will be reflected in an event title! (Note: JSON data should be sanitized on the client side, not the server side.) -- OUR DATA isn't reflected in URL, right?
+5. we need to run everything by a validator - in process
 
 7. we need to pass tokens to prevent CSRF attacks ("Hint: You will need to send your CSRF tokens in your AJAX requests. Remember that AJAX still submits forms and runs server-side scripts, just like the vanilla forms you've been using in Modules 2 and 3.")
 - CSRF tokens are passed when editing or removing events (3 points)
@@ -42,4 +40,18 @@ TO DOs:
 10. im 99% sure we use queries "Use prepared queries to prevent SQL Injection attacks."
 
 11. the fuck? "Session cookie is HTTP-Only (3 points)"
+
+Validator:
+
+- newUser.php PASS
+- getEvents.php PASS
+- newEvents.php PASS
+- editEvent.php PASS
+- deleteEvent.php PASS
+- checkUser.php PASS
+- calscript.js 
+- calendar.min.js MAJOR ISSUES
+- calendar.html 
+- calendar.css PASS
+- calendar_database.php GETTING WEIRD THINGS, BUT I THINK THIS IS BECAUSE IT JUST CONNECTS TO THE MYSQL
 
