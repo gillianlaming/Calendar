@@ -8,7 +8,8 @@ function updateCalendar(){ // builds html table
 		let this_week = "week" + i;
 		for(let d in days){
             let this_date = days[d].getDate();
-            let formatted_date = days[d].getFullYear() + "-" + (days[d].getMonth() + 1) + "-" + this_date;
+            let this_month = days[d].getMonth();
+            let formatted_date = days[d].getFullYear() + "-" + (this_month +1) + "-" + this_date;
 
             if (days[d].getMonth() == currentMonth.month){
                 $('#'+this_week).append("<td class='day_this_month' id="+formatted_date+"><h6 class='date'>"+this_date+"</h6><img src='plus.png' class='plus' onclick='addEvent(this)'></td>");
@@ -40,6 +41,9 @@ function displayUserEvents(response){ // takes json response and displays events
             day = day.substring(1);
             date = date.substring(0,7)+"-"+day;
         }
+        
+        if (date[5] == 0)
+            date = date.slice(0, 5) + date.slice(6, date.length);
 
         if (time[0] == 0)
             time = time.substring(1);
@@ -86,8 +90,7 @@ function getEvents(){ // ajax call to getEvents.php which gets this user's event
                 colorBlocks(response);
             }
             else{
-                console.log("a swing and a miss")
-                window.addEventListener('load', updateCalendar, false); // show the calendar on load
+                location.reload();
             }
         }
     });
@@ -134,7 +137,6 @@ function sendNewEvent(form_contents){ // this sends the form contents to php whi
         url: 'newEvent.php',
         data: { event_name: form_contents[0], start_date: form_contents[1], end_date: form_contents[2], location: form_contents[3], color: form_contents[4], username: form_contents[5], sessionCookie: form_contents[6]},
         success: function(response) {
-            console.log(response)
             $('#submit').replaceWith($('#submit').clone()); // removes event listeners
             getEvents();
         }

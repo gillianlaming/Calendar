@@ -117,14 +117,12 @@
         //logout if selected
         document.getElementById("yesLogout").addEventListener("click", function(){
             $.ajax({
-                url: 'logout.php', 
+                url: 'cal_logout.php', 
                 success: function(response) {
                     location.reload()
                 }
             
         });
-        window.addEventListener('load', updateCalendar, false); // show the calendar on load
-        //location.reload();
         }, false);
 
         document.getElementById("cancel").addEventListener("click", function(){
@@ -153,7 +151,6 @@
         $('#popUpLogin').html('<br><h3>login</h3>');
         $('#username1').val("");
         $('#password1').val(""); 
-        $('#logmein').val('login');
         $('#loggingin').dialog();
         $('#calendar').css('opacity', '.75');
     
@@ -175,6 +172,7 @@
             url: 'checkUser.php', 
             data: { username: loginInfo[0], password: loginInfo[1] },
             success: function(response) {
+                $('#logmein').replaceWith($('#logmein').clone());
                 if (!(response === "false")){
                     setCookie(response);
                     username = loginInfo[0];
@@ -186,19 +184,16 @@
         });    
     }
 
-    
-function setCookie(cookie){
-    sessionCookie = cookie
-}
+    function setCookie(cookie){
+        sessionCookie = cookie
+    }
     //registration pop up
-   document.getElementById("register").addEventListener("click", register, false);
+    document.getElementById("register").addEventListener("click", register, false);
 
     function register(){
-        
         $('#popUpRegister').html('<br><h3>register</h3>');
         $('#username').val("");
         $('#password').val(""); 
-        $('#register').val('');
         $('#registering').dialog();
         $('#calendar').css('opacity', '.75');
         
@@ -212,23 +207,24 @@ function setCookie(cookie){
         });
     }
 
-function sendNewUser(registration){
-    $('#popUpRegister').closest('.ui-dialog-content').dialog('close');
-    $.ajax({
-        type: 'POST',
-        url: 'newUser.php', 
-        data: { username: registration[0], password: registration[1] },
-        success: function(response) {
-            if(response){
-                alert("successful registration, click login to login");
+    function sendNewUser(registration){
+        $('#popUpRegister').closest('.ui-dialog-content').dialog('close');
+        $.ajax({
+            type: 'POST',
+            url: 'newUser.php', 
+            data: { username: registration[0], password: registration[1] },
+            success: function(response) {
+                $('#registerme').replaceWith($('#registerme').clone());
+                if(response == 'true'){
+                    alert("successful registration, click login to login");
+                }
+                else{
+                    alert ("username exists, please choose another");
+                    register();
+                }
             }
-            else{
-                alert ("username exists, please choose another");
-                register();
-            }
-        }
-    });
-}
+        });
+    }
 
     document.getElementById("colorMode").addEventListener("click", function(){
         $('#bottom').css('display', 'inline-block');
