@@ -62,6 +62,8 @@ function loggedIn(){ // if login is successful, the calendar becomes editable
     $('#login').css('display', 'none');
     $('#logout').css('display', 'block');
 
+
+
     let images = document.getElementsByClassName('plus');
     for (let i =0; i<images.length; i++){
         images[i].style.display = 'block';
@@ -77,8 +79,14 @@ function getEvents(){ // ajax call to getEvents.php which gets this user's event
      $.ajax({
         url: 'getEvents.php',
         success: function(response) {
-            displayUserEvents(response);
-            colorBlocks(response);
+            if(!(response == "")){
+                displayUserEvents(response);
+                colorBlocks(response);
+            }
+            else{
+                console.log("a swing and a miss")
+                window.addEventListener('load', updateCalendar, false); // show the calendar on load
+            }
         }
     });
 }

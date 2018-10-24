@@ -108,9 +108,12 @@
             $.ajax({
                 url: 'logout.php', 
                 success: function(response) {
-                    console.log("success")
+                    location.reload()
             }
+            
         });
+        window.addEventListener('load', updateCalendar, false); // show the calendar on load
+        //location.reload();
         }, false);
 
         document.getElementById("cancel").addEventListener("click", function(){

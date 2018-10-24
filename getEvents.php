@@ -23,4 +23,7 @@
         $result->close();
         $mysqli->close();
     }
+    else{
+        echo("");
+    }
 ?>
