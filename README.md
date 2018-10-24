@@ -8,6 +8,9 @@
 ##HOW TO USE:
 * when the page loads, you will see an empty calendar
 * to interact with the calendar, login or register with the buttons at the top right
+    - to see what it looks like for a frequent user, use 
+######username: leela & password: leela
+
 * after succesfully logging in, all of your events are displayed
     - you can add events by clicking the plus sign
     - you can edit or delete your events by clicking on the event name
