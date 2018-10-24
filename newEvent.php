@@ -9,8 +9,10 @@
         $loc = $_POST['location'];
         $color = $_POST['color'];
         $username = $_SESSION['name'];
-        // $_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(32));
+        $token = $_SESSION['token'];
+        $cookie = $_POST['sessionCookie'];
         
+        if ($cookie == $token){
         $add_event = $mysqli->prepare("insert into events (username, event_name, start_date, end_date, location, color) values (?, ?, ?, ?, ?, ?)");
         $result = "true";
         if(!$add_event){
@@ -18,11 +20,15 @@
             $result = "false";
             exit;
         }
-        echo($response);
+        echo($result);
 
         $add_event->bind_param('ssssss', $username, $event_name, $start_date, $end_date, $loc, $color);
         $add_event->execute();
         $add_event->close();
         $mysqli->close();
     }
+    else {
+        echo("token incorrect");
+    }
+}
 ?>

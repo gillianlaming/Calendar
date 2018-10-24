@@ -1,10 +1,13 @@
 <?php
     require 'calendar_database.php';
     session_start();
-    if(isset($_SESSION['name']) && isset($_SESSION['token'])){
+    if(isset($_SESSION['name'])){
         $user = $_SESSION['name'];
+        $sessionCookie = $_POST['sessionCookie'];
+        $token = $_SESSION['token'];
         $myArray = array();
-        
+
+        if ($sessionCookie == $token){
         $result = $mysqli->prepare("select event_id, username, event_name, start_date, end_date, location, color from events where username=?");
         if(!$result){
             printf("Query Prep Failed: %s\n", $mysqli->error);
@@ -22,8 +25,12 @@
         
         $result->close();
         $mysqli->close();
+
+        }
     }
-    else{
-        echo("");
-    }
+        else{
+            echo("");
+        }
+    
+    
 ?>

@@ -2,7 +2,9 @@
 require 'calendar_database.php';
 session_start();
 		
-	if(isset($_SESSION['name'])&&isset($_SESSION['token'])){ 
+	if(isset($_SESSION['name'])){ 
+        $sessionCookie = $_POST['sessionCookie'];
+        $token = $_SESSION['token'];
 
         $event_id = $_POST['event_id'];
             //delete from databse

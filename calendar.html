@@ -78,7 +78,7 @@
 
 <script>
     let username = "";
-    
+    let sessionCookie = null;
     let currentMonth = new Month(2018, 9); // current month is October 2018
     document.getElementById("month_label").innerHTML = getMonthName()+" "+currentMonth.year;
     
@@ -120,7 +120,7 @@
                 url: 'logout.php', 
                 success: function(response) {
                     location.reload()
-            }
+                }
             
         });
         window.addEventListener('load', updateCalendar, false); // show the calendar on load
@@ -135,11 +135,18 @@
 
     }, false)
 
-    if (performance.navigation.type == 1) {
-        getEvents();
-        console.log("page was refreshed");
-        //regain token from php
-    }
+    // if (performance.navigation.type == 1) {
+    //     console.log("page was refreshed");
+    //     $.ajax({
+    //         url: 'session.php', 
+    //         success: function(response) {
+    //             setCookie(response);
+    //             console.log("refreshment")
+    //         }
+    //     }); 
+    //     //getEvents();
+    //     //regain token from php
+    // }
 
    //login popup
     document.getElementById("login").addEventListener("click", function(){
@@ -168,8 +175,8 @@
             url: 'checkUser.php', 
             data: { username: loginInfo[0], password: loginInfo[1] },
             success: function(response) {
-                console.log(response)
-                if (response === "true"){
+                if (!(response === "false")){
+                    setCookie(response);
                     username = loginInfo[0];
                     loggedIn();
                 } else{
@@ -179,6 +186,10 @@
         });    
     }
 
+    
+function setCookie(cookie){
+    sessionCookie = cookie
+}
     //registration pop up
    document.getElementById("register").addEventListener("click", register, false);
 

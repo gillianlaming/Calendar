@@ -77,7 +77,9 @@ function loggedIn(){ // if login is successful, the calendar becomes editable
 
 function getEvents(){ // ajax call to getEvents.php which gets this user's events from sql
      $.ajax({
+        type: 'POST',
         url: 'getEvents.php',
+        data: {sessionCookie},
         success: function(response) {
             if(!(response == "")){
                 displayUserEvents(response);
@@ -113,7 +115,7 @@ function addEvent(day) {  // this function makes the dialog box pop up, and adds
 
     document.getElementById('submit').addEventListener("click", function(){
         if (username != ''){
-            let form_contents = [$('#event_name').val(), $('#start_date').val(), $('#end_date').val(), $('#location').val(), $('select').val(), username];
+            let form_contents = [$('#event_name').val(), $('#start_date').val(), $('#end_date').val(), $('#location').val(), $('select').val(), username, sessionCookie];
             sendNewEvent(form_contents);
         } else {
             alert("you are not logged in");
@@ -130,8 +132,9 @@ function sendNewEvent(form_contents){ // this sends the form contents to php whi
     $.ajax({
         type: 'POST',
         url: 'newEvent.php',
-        data: { event_name: form_contents[0], start_date: form_contents[1], end_date: form_contents[2], location: form_contents[3], color: form_contents[4], username: form_contents[5]},
+        data: { event_name: form_contents[0], start_date: form_contents[1], end_date: form_contents[2], location: form_contents[3], color: form_contents[4], username: form_contents[5], sessionCookie: form_contents[6]},
         success: function(response) {
+            console.log(response)
             $('#submit').replaceWith($('#submit').clone()); // removes event listeners
             getEvents();
         }
@@ -161,7 +164,7 @@ function editEvent(event){ // pulls up dialog box for editing or deleting event,
             $('#calendar').css('opacity', '1');
         });
         document.getElementById('submit').addEventListener("click", function(){
-            let form_contents = [$('#event_name').val(), $('#start_date').val(), $('#end_date').val(), $('#location').val(), this_event_id];
+            let form_contents = [$('#event_name').val(), $('#start_date').val(), $('#end_date').val(), $('#location').val(), this_event_id, sessionCookie];
             editThisEvent(form_contents);
         }, false);
         document.getElementById("delete_event").addEventListener("click", function(){
@@ -180,7 +183,7 @@ function editThisEvent(form_contents) { // sends form contents to php which send
     $.ajax({
         type: 'POST',
         url: 'editEvent.php',
-        data: { event_name: form_contents[0], start_date: form_contents[1], end_date: form_contents[2], location: form_contents[3], event_id: form_contents[4] },
+        data: { event_name: form_contents[0], start_date: form_contents[1], end_date: form_contents[2], location: form_contents[3], event_id: form_contents[4], sessionCookie: form_contents[5] },
         success: function(response) {
             $('#submit').replaceWith($('#submit').clone());
             getEvents();
@@ -193,7 +196,7 @@ function deleteMe(info){ // sends info of what event to delete
     $.ajax({
         type: 'POST',
         url: 'deleteEvent.php', 
-        data: { event_id: info },
+        data: { event_id: info, sessionCookie },
         success: function(response) {
             if (response == "true"){
                 $('#delete_event').replaceWith($('#delete_event').clone());
