@@ -216,6 +216,21 @@ function sendNewUser(registration){
         }
     });
 }
+
+    document.getElementById("colorMode").addEventListener("click", function(){
+        $('#bottom').css('display', 'inline-block');
+        $('#calendar').css('display', 'none'); $('#calStuff').css('display', 'none');
+        $('#colorMode').css('display', 'none');
+        $('#back').css('display', 'inline-block');
+    }, false);
+
+    document.getElementById("back").addEventListener("click", function(){
+        $('#bottom').css('display', 'none');
+        $('#calendar').css('display', 'block'); $('#calStuff').css('display', 'block');
+        $('#colorMode').css('display', 'block');
+        $('#back').css('display', 'none');
+    }, false);
+
 </script>
 
 </body>
