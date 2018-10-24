@@ -24,4 +24,4 @@
 * 'color view' shows all of user's events organized by color
 * when events are added, the event name is displayed in its assigned color
 
-###enjoy the fruits of our labor! :bowtie:
+###enjoy the fruits of our labor! :)
