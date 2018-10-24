@@ -64,16 +64,7 @@
                 <input type="submit" name="cancel" id="cancel" value="cancel"><br><br>
         </div>
 
-        <table id="calendar">
-            <tr>
-                <td>Sunday</td><td>Monday</td><td>Tuesday</td><td>Wednesday</td><td>Thursday</td><td>Friday</td><td>Saturday</td>
-            </tr>
-            <tr id="week1" class="week"></tr>
-            <tr id="week2" class="week"></tr>
-            <tr id="week3" class="week"></tr>
-            <tr id="week4" class="week"></tr>
-            <tr id="week5" class="week"></tr>
-        </table>
+        <table id="calendar"></table>
 
         <br><br>
         <div id="bottom">
@@ -90,6 +81,14 @@
     
     let currentMonth = new Month(2018, 9); // current month is October 2018
     document.getElementById("month_label").innerHTML = getMonthName()+" "+currentMonth.year;
+    
+    document.getElementById("calendar").innerHTML = '<tr><td>Sunday</td><td>Monday</td><td>Tuesday</td><td>Wednesday</td><td>Thursday</td><td>Friday</td><td>Saturday</td></tr> \
+            <tr id="week1" class="week"></tr> \
+            <tr id="week2" class="week"></tr> \
+            <tr id="week3" class="week"></tr> \
+            <tr id="week4" class="week"></tr> \
+            <tr id="week5" class="week"></tr>';
+
     window.addEventListener('load', updateCalendar, false); // show the calendar on load
     // Change the month when the "next" button is pressed
     document.getElementById("next_month_btn").addEventListener("click", function(){
