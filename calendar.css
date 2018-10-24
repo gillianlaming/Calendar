@@ -28,6 +28,10 @@ p{
     width: 150px;
 }
 
+#month_label{
+    font-size: 1.17em;
+}
+
 .day_this_month{
     background-color: #8BD6FD;
 }
